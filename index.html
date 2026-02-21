@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>The NexGen Leaders Foundation | Coming Soon</title>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Permanent+Marker&family=Chewy&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-yellow: #ffd200; 
+            --brand-black: #000000;
+            --bg-grey: #d9d9d9; 
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-grey);
+            overflow-x: hidden;
+            overflow-y: auto; 
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .stage {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            min-height: 100vh;
+            margin-top: -60px;
+            perspective: 1000px;
+            transform-style: preserve-3d;
+        }
+
+        .container {
+            text-align: center;
+            width: 900px; 
+            max-width: 95vw;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: 120px;
+            
+            /* JITTER-PROOF GPU LOCKS */
+            opacity: 0;
+            transform: translate3d(0, 0, 0) scale(1); 
+            backface-visibility: hidden;
+            -webkit-font-smoothing: antialiased;
+            will-change: transform, opacity;
+            
+            animation: bringForward 1.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        @keyframes bringForward {
+            0% { opacity: 0; transform: translate3d(0, 40px, 0) scale(0.8); filter: blur(1px); }
+            100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); filter: blur(0); }
+        }
+
+        .logo {
+            width: 800px;
+            max-width: 100%;
+            height: auto;
+            margin-bottom: -180px; 
+            pointer-events: none; 
+        }
+
+        .slogan {
+            font-family: 'Chewy', cursive;
+            font-size: 1.8rem;
+            letter-spacing: 5px;
+            color: rgb(0, 0, 0); 
+            margin-bottom: 39px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .slogan span {
+            display: inline-block;
+            cursor: pointer;
+            -webkit-text-stroke: 1.5px var(--brand-black); 
+            transition: transform 0.3s ease, color 0.3s ease;
+            paint-order: stroke fill;
+        }
+
+        .slogan span:hover {
+            color: var(--brand-yellow);
+            transform: scale(1.3) translateY(-5px);
+            text-shadow: 2px 2px 0px var(--brand-black);
+        }
+
+        .divider {
+            height: 4px;
+            width: 120px;
+            background-color: var(--brand-black);
+            margin-bottom: 30px;
+            border-radius: 2px;
+        }
+
+        /* COMING SOON SECTION */
+        .coming-soon-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .barrier-emoji {
+            font-size: 3.5rem; /* Large enough to match Archivo Black height on desktop */
+            line-height: 1;
+            display: flex;
+            align-items: center;
+        }
+
+        h1 {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 4rem;
+            text-transform: uppercase;
+            color: var(--brand-black);
+            margin: 0;
+            white-space: nowrap;
+        }
+
+        #soon-target {
+            color: var(--brand-yellow);
+            -webkit-text-stroke: 2px var(--brand-black); 
+            text-shadow: 4px 4px 0px var(--brand-black);
+            display: inline-block;
+            cursor: pointer;
+            position: relative;
+            z-index: 100;
+            will-change: transform;
+        }
+
+        #soon-target.inflating {
+            transition: transform 5s linear;
+            transform: scale(3.5) translateY(-50px);
+        }
+
+        #soon-target.shrinking {
+            transition: transform 0.4s ease-out !important;
+            transform: scale(1) translateY(0);
+        }
+
+        #soon-target.flying {
+            transition: none !important; 
+            animation: balloonFall 3.5s ease-in-out forwards;
+            pointer-events: none;
+        }
+
+        @keyframes balloonFall {
+            0% { transform: scale(3.5) translate(0, -50px) rotate(0deg); }
+            15% { transform: scale(3.2) translate(-350px, -200px) rotate(-15deg); }
+            35% { transform: scale(2.8) translate(400px, -150px) rotate(20deg); }
+            55% { transform: scale(2.2) translate(-450px, -80px) rotate(-10deg); }
+            75% { transform: scale(1.6) translate(300px, -30px) rotate(15deg); }
+            92% { transform: scale(1.1) translate(-50px, -10px) rotate(-5deg); }
+            100% { transform: scale(1) translate(0, 0) rotate(0deg); }
+        }
+
+        p {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 1.4rem;
+            color: var(--brand-black);
+            background-color: var(--brand-yellow);
+            display: inline-block;
+            padding: 10px 25px;
+            margin-top: 30px;
+            transform: rotate(-2deg);
+            border: 3px solid var(--brand-black);
+            box-shadow: 6px 6px 0px var(--brand-black);
+        }
+
+        /* --------------------------------------------------
+           📱 MOBILE ADJUSTMENTS (NO CHANGE TO DESKTOP)
+           -------------------------------------------------- */
+        @media screen and (max-width: 768px) {
+            .stage { margin-top: 10px; }
+            
+            .logo { 
+                margin-bottom: -15vw; 
+                max-width: 85vw;
+            }
+
+            .slogan { 
+                font-size: 6vw; 
+                margin-top: 15px; 
+                margin-bottom: 20px;
+            }
+
+            .divider { width: 20vw; }
+
+            .coming-soon-wrapper {
+                gap: 8px; /* Tightens space for small screens */
+            }
+
+            .barrier-emoji {
+                font-size: 8vw; /* Scales proportionally with text on mobile */
+            }
+
+            h1 { 
+                font-size: 7.5vw; 
+            }
+
+            p { 
+                font-size: 4vw; 
+                width: 85vw;
+                padding: 12px;
+                white-space: normal;
+                line-height: 1.3;
+            }
+
+            @keyframes balloonFall {
+                0% { transform: scale(2.5) translate(0, -30px) rotate(0deg); }
+                15% { transform: scale(2.2) translate(-30vw, -100px) rotate(-10deg); }
+                40% { transform: scale(1.8) translate(30vw, -70px) rotate(10deg); }
+                75% { transform: scale(1.4) translate(-15vw, -30px) rotate(-5deg); }
+                100% { transform: scale(1) translate(0, 0) rotate(0deg); }
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="stage">
+        <div class="container">
+            <img src="Nexgen (1).png" alt="NexGen" class="logo">
+            
+            <div class="slogan">
+                <span>Rise.</span> <span>Lead.</span> <span>Succeed.</span>
+            </div>
+            
+            <div class="divider"></div>
+            
+            <div class="coming-soon-wrapper">
+                <span class="barrier-emoji">🚧</span>
+                <h1>COMING <span id="soon-target">SOON</span></h1>
+                <span class="barrier-emoji">🚧</span>
+            </div>
+
+            <p>Empowering the next generation of purpose-driven leaders.</p>
+        </div>
+    </div>
+
+    <script>
+        const soon = document.getElementById('soon-target');
+        let inflationTimer;
+
+        function startInflation() {
+            if (!soon.classList.contains('flying')) {
+                soon.classList.remove('shrinking');
+                soon.classList.add('inflating');
+                inflationTimer = setTimeout(triggerFlight, 5000);
+            }
+        }
+
+        function stopInflation() {
+            clearTimeout(inflationTimer);
+            if (soon.classList.contains('inflating')) {
+                soon.classList.remove('inflating');
+                soon.classList.add('shrinking');
+                // Clean up classes after shrink animation
+                setTimeout(() => soon.classList.remove('shrinking'), 400);
+            }
+        }
+
+        function triggerFlight() {
+            soon.classList.remove('inflating');
+            soon.classList.add('flying');
+            // Allow the balloon to be reset after path finishes
+            setTimeout(() => {
+                soon.classList.remove('flying');
+            }, 3500); 
+        }
+
+        // Event Listeners
+        soon.addEventListener('mouseenter', startInflation);
+        soon.addEventListener('mouseleave', stopInflation);
+        
+        // Touch support for mobile (Hold to inflate)
+        soon.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            startInflation();
+        });
+        soon.addEventListener('touchend', stopInflation);
+    </script>
+</body>
+</html>

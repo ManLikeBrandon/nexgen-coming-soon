@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate | The NexGen Leaders Foundation</title>
+    <meta name="description" content="Support the NexGen Leaders Foundation. Your donation funds leadership programs, mentorship, and youth grants that change the trajectory of young lives.">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;1,9..40,400&family=Permanent+Marker&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<nav class="nav" id="main-nav">
+    <a class="nav-brand" href="main.html">
+        <img src="Nexgen (1).png" alt="NexGen Leaders Foundation">
+    </a>
+    <ul class="nav-links" id="nav-links">
+        <li><a href="main.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="programs.html">Programs</a></li>
+        <li><a href="team.html">Our Team</a></li>
+        <li><a href="get-involved.html">Get Involved</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="donate.html" class="nav-cta active">Donate</a></li>
+    </ul>
+    <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+    </button>
+</nav>
+
+<div class="page-hero">
+    <div class="page-hero-inner">
+        <div class="breadcrumb">
+            <a href="main.html">Home</a> &nbsp;/&nbsp; <span>Donate</span>
+        </div>
+        <span class="eyebrow">Support Our Work</span>
+        <h1>Invest in the<br>Next Generation</h1>
+        <p>Every contribution funds real programs for real young people. We publish where every rand goes. You can hold us to that.</p>
+    </div>
+</div>
+
+<section class="section">
+    <div class="section-inner">
+        <div class="two-col">
+
+            <!-- Impact info -->
+            <div>
+                <span class="section-eyebrow">Your Impact</span>
+                <h2 class="section-title">What Your<br><span class="accent">Gift Does</span></h2>
+                <div class="section-bar"></div>
+                <p class="donate-intro-text">
+                    Over 85% of every rand donated goes directly to programs, scholarships, and
+                    participant support. Here's exactly what different amounts do:
+                </p>
+
+                <div class="impact-item">
+                    <div class="impact-amount">R250</div>
+                    <div class="impact-desc">
+                        <h4>Workshop Materials</h4>
+                        <p>Workbooks, resources, and materials for one participant to attend a full-day skills workshop.</p>
+                    </div>
+                </div>
+
+                <div class="impact-item">
+                    <div class="impact-amount">R500</div>
+                    <div class="impact-desc">
+                        <h4>One Month of Mentorship</h4>
+                        <p>Covers the coordination, training, and administration behind one month of structured mentorship for a participant.</p>
+                    </div>
+                </div>
+
+                <div class="impact-item">
+                    <div class="impact-amount">R1 000</div>
+                    <div class="impact-desc">
+                        <h4>Scholarship Contribution</h4>
+                        <p>One month toward a participant's Leadership Academy fees — for someone who can't otherwise afford to be there.</p>
+                    </div>
+                </div>
+
+                <div class="impact-item">
+                    <div class="impact-amount">R5 000</div>
+                    <div class="impact-desc">
+                        <h4>Youth Impact Grant</h4>
+                        <p>Puts seed money into a young person's hands to run a real community project, with six months of support alongside it.</p>
+                    </div>
+                </div>
+
+                <div class="impact-item">
+                    <div class="impact-amount">R10 000+</div>
+                    <div class="impact-desc">
+                        <h4>Full Program Sponsorship</h4>
+                        <p>Sponsors one person's entire 12-month Leadership Academy journey — from application to graduation.</p>
+                    </div>
+                </div>
+
+                <div class="callout">
+                    <div class="callout-accent">100% Accountability</div>
+                    <p>We publish an annual impact report with full financial disclosure. Admin overhead stays under 15%. The rest goes to programs.</p>
+                </div>
+            </div>
+
+            <!-- Donation form -->
+            <div>
+                <div class="form-wrap">
+                    <h3>Make a Donation</h3>
+                    <p class="form-note">Choose an amount below. You can change or cancel any time.</p>
+
+                    <label class="form-group">
+                        <span>Donation Frequency</span>
+                        <div class="freq-toggle">
+                            <button class="freq-btn" id="freq-once" type="button">Give Once</button>
+                            <button class="freq-btn active" id="freq-monthly" type="button">Monthly</button>
+                            <button class="freq-btn" id="freq-annual" type="button">Annually</button>
+                        </div>
+                    </label>
+
+                    <div class="form-group">
+                        <label>Select an Amount</label>
+                        <div class="donation-grid">
+                            <button class="amt-btn" type="button" data-amount="250">
+                                R250
+                                <small>Materials</small>
+                            </button>
+                            <button class="amt-btn" type="button" data-amount="500">
+                                R500
+                                <small>Mentorship</small>
+                            </button>
+                            <button class="amt-btn selected" type="button" data-amount="1000">
+                                R1 000
+                                <small>Scholarship</small>
+                            </button>
+                            <button class="amt-btn" type="button" data-amount="2500">
+                                R2 500
+                                <small>Grant Boost</small>
+                            </button>
+                            <button class="amt-btn" type="button" data-amount="5000">
+                                R5 000
+                                <small>Seed Grant</small>
+                            </button>
+                            <button class="amt-btn" type="button" data-amount="other">
+                                Other
+                                <small>Custom</small>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="custom-amount-group" hidden>
+                        <label for="custom-amount">Custom Amount (R)</label>
+                        <input type="number" id="custom-amount" name="custom_amount" placeholder="Enter amount in Rand" min="10">
+                    </div>
+
+                    <form action="#" method="post" novalidate>
+                        <input type="hidden" id="donation-amount" name="amount" value="1000">
+                        <input type="hidden" id="donation-freq" name="frequency" value="monthly">
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="d-first">First Name</label>
+                                <input type="text" id="d-first" name="first_name" placeholder="First name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="d-last">Last Name</label>
+                                <input type="text" id="d-last" name="last_name" placeholder="Last name" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="d-email">Email Address</label>
+                            <input type="email" id="d-email" name="email" placeholder="you@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="d-card">Card Number</label>
+                            <input type="text" id="d-card" name="card" placeholder="1234 5678 9012 3456" maxlength="19" required autocomplete="cc-number">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="d-expiry">Expiry Date</label>
+                                <input type="text" id="d-expiry" name="expiry" placeholder="MM / YY" maxlength="7" required autocomplete="cc-exp">
+                            </div>
+                            <div class="form-group">
+                                <label for="d-cvv">CVV</label>
+                                <input type="text" id="d-cvv" name="cvv" placeholder="123" maxlength="4" required autocomplete="cc-csc">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="check-group">
+                                <input type="checkbox" name="anonymous">
+                                <span>Make my donation anonymous</span>
+                            </label>
+                            <label class="check-group">
+                                <input type="checkbox" name="newsletter" checked>
+                                <span>Send me impact updates</span>
+                            </label>
+                            <label class="check-group">
+                                <input type="checkbox" name="tax_receipt" checked>
+                                <span>Email me a tax receipt</span>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" id="donate-submit">
+                            Donate R1 000 / Month
+                        </button>
+                        <p class="form-note">🔒 Secure, encrypted payment. Cancel monthly giving any time.</p>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section class="section section-grey">
+    <div class="section-inner">
+        <div class="section-center-wrap text-center">
+            <span class="section-eyebrow">Other Ways to Give</span>
+            <h2 class="section-title">More Ways to <span class="accent">Support</span></h2>
+            <div class="section-bar section-bar-center"></div>
+        </div>
+        <div class="cards-grid cards-grid-3">
+            <div class="card">
+                <span class="card-icon">🏢</span>
+                <h3>Corporate Giving</h3>
+                <p>We offer corporate giving packages that include program naming rights, co-branding, and employee engagement. Talk to us about what works for your organisation.</p>
+                <a href="contact.html" class="card-link">Enquire →</a>
+            </div>
+            <div class="card">
+                <span class="card-icon">🎗️</span>
+                <h3>Sponsorship</h3>
+                <p>Sponsor a specific program, cohort, or event. Sponsorships are acknowledged and you receive direct reporting on the impact of your contribution.</p>
+                <a href="contact.html" class="card-link">Enquire →</a>
+            </div>
+            <div class="card">
+                <span class="card-icon">📜</span>
+                <h3>Legacy Giving</h3>
+                <p>Include the NexGen Leaders Foundation in your estate or legacy planning. We're happy to have a confidential conversation about how that might work.</p>
+                <a href="contact.html" class="card-link">Contact Us →</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="stats-band">
+    <div class="stats-inner">
+        <div class="stat-item">
+            <div class="stat-number">R250K+</div>
+            <div class="stat-label">Total Raised to Date</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">85%</div>
+            <div class="stat-label">Goes Directly to Programs</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">500+</div>
+            <div class="stat-label">Lives Impacted</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">100%</div>
+            <div class="stat-label">Financial Transparency</div>
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <img src="Nexgen (1).png" alt="NexGen Leaders Foundation" class="footer-brand-logo">
+                <p>Developing the next generation of leaders through structured programs, mentorship, and community — since 2019.</p>
+                <div class="footer-slogan">Rise. Lead. Succeed.</div>
+            </div>
+            <div class="footer-col">
+                <h4>Organisation</h4>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="team.html">Our Team</a></li>
+                    <li><a href="programs.html">Programs</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Get Involved</h4>
+                <ul>
+                    <li><a href="get-involved.html">Apply to a Program</a></li>
+                    <li><a href="get-involved.html">Become a Mentor</a></li>
+                    <li><a href="get-involved.html">Volunteer</a></li>
+                    <li><a href="get-involved.html">Partner With Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="donate.html">Donate</a></li>
+                    <li><a href="donate.html">Corporate Giving</a></li>
+                    <li><a href="donate.html">Sponsorship</a></li>
+                    <li><a href="contact.html">Press &amp; Media</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 The NexGen Leaders Foundation. Registered Non-Profit Organisation.</p>
+            <div class="footer-bottom-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Use</a>
+                <a href="#">NPO Registration</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Nav toggle
+    const toggle = document.getElementById('nav-toggle');
+    const links  = document.getElementById('nav-links');
+    toggle.addEventListener('click', () => links.classList.toggle('open'));
+    document.querySelectorAll('.nav-links a').forEach(a => {
+        a.addEventListener('click', () => links.classList.remove('open'));
+    });
+
+    // Donation amount selection
+    const amtBtns   = document.querySelectorAll('.amt-btn');
+    const customGrp = document.getElementById('custom-amount-group');
+    const amountInput = document.getElementById('donation-amount');
+    const submitBtn = document.getElementById('donate-submit');
+
+    let selectedAmount = 1000;
+    let selectedFreq   = 'monthly';
+
+    function updateLabel() {
+        const freqSuffix = { once: '', monthly: ' / Month', annual: ' / Year' }[selectedFreq] || '';
+        const amtLabel   = selectedAmount === 'other'
+            ? (document.getElementById('custom-amount').value
+                ? 'R' + document.getElementById('custom-amount').value
+                : 'Custom amount')
+            : 'R' + selectedAmount.toLocaleString('en-ZA');
+        submitBtn.textContent = 'Donate ' + amtLabel + freqSuffix;
+    }
+
+    amtBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            amtBtns.forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            const val = btn.dataset.amount;
+            if (val === 'other') {
+                customGrp.hidden = false;
+                selectedAmount = 'other';
+            } else {
+                customGrp.hidden = true;
+                selectedAmount = parseInt(val, 10);
+                amountInput.value = selectedAmount;
+            }
+            updateLabel();
+        });
+    });
+
+    document.getElementById('custom-amount').addEventListener('input', function () {
+        amountInput.value = this.value;
+        updateLabel();
+    });
+
+    // Frequency toggle
+    document.querySelectorAll('.freq-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.freq-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const map = { 'freq-once': 'once', 'freq-monthly': 'monthly', 'freq-annual': 'annual' };
+            selectedFreq = map[btn.id];
+            document.getElementById('donation-freq').value = selectedFreq;
+            updateLabel();
+        });
+    });
+
+    // Card formatting
+    document.getElementById('d-card').addEventListener('input', function () {
+        this.value = this.value.replace(/\D/g, '').replace(/(\d{4})(?=\d)/g, '$1 ').slice(0, 19);
+    });
+    document.getElementById('d-expiry').addEventListener('input', function () {
+        this.value = this.value.replace(/\D/g, '').replace(/(\d{2})(\d)/, '$1 / $2').slice(0, 7);
+    });
+</script>
+</body>
+</html>

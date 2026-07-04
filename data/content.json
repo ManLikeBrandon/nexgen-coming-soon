@@ -4,13 +4,13 @@
       "label": "Home",
       "regions": {
         "heroEyebrow": { "label": "Hero Eyebrow", "type": "text", "value": "Rise. Lead. Succeed." },
-        "heroTitle": { "label": "Hero Title", "type": "html", "value": "Shaping<br><span class=\"hl\">Tomorrow's</span><br>Leaders Today" },
-        "heroSubtitle": { "label": "Hero Subtitle", "type": "text", "value": "We work with ambitious young people — 16 to 25 — who are ready to lead but need the right structure, the right mentors, and the right room to grow. That's what we build." },
+        "heroTitle": { "label": "Hero Title", "type": "html", "value": "Empowering<br><span class=\"hl\">Future</span><br>Leaders" },
+        "heroSubtitle": { "label": "Hero Subtitle", "type": "text", "value": "The NexGen Leaders Foundation is a non-profit company of young professionals and emerging leaders dedicated to empowering youth in the Southern Suburbs through mentorship, educational support, and leadership development." },
         "missionEyebrow": { "label": "Mission Eyebrow", "type": "text", "value": "Who We Are" },
         "missionTitle": { "label": "Mission Title", "type": "html", "value": "Built for the <span class=\"accent\">People Who Come Next</span>" },
-        "missionBodyOne": { "label": "Mission Body One", "type": "text", "value": "We're a nonprofit that develops young leaders. Not through inspiration posters and one-day workshops, but through real programs with clear structure — and the expectation that participants will do the work." },
-        "missionBodyTwo": { "label": "Mission Body Two", "type": "text", "value": "We believe potential is everywhere. The right conditions for it are not. Our job is to build those conditions, then get out of the way." },
-        "programsLead": { "label": "Programs Lead", "type": "text", "value": "Four programs. Each one built around what young leaders actually need — not what looks good in a brochure." },
+        "missionBodyOne": { "label": "Mission Body One", "type": "text", "value": "We bridge the gap between potential and opportunity by walking alongside students with relatable mentorship and practical guidance for academic and career growth." },
+        "missionBodyTwo": { "label": "Mission Body Two", "type": "text", "value": "Our targeted school impact focuses on Steenberg, Sibelius, Crestway, Lavender Hill, Heathfield, and Pelican Park High School." },
+        "programsLead": { "label": "Programs Lead", "type": "text", "value": "Our four core programs are focused on mentorship, educational empowerment, leadership development, and community advocacy." },
         "quoteHtml": { "label": "Quote", "type": "html", "value": "\"The world doesn't need more followers.<br>It needs <span class=\"hl\">leaders who know why they lead.</span>\"" },
         "joinMovementBody": { "label": "Join Movement Body", "type": "text", "value": "Whether you want to join a program, mentor someone, or put money behind work that actually matters — we'll find the right fit." },
         "donateCtaTitle": { "label": "Donate CTA Title", "type": "html", "value": "Every Rand You Give<br>Builds a Leader" },
@@ -37,18 +37,18 @@
       "label": "Programs",
       "regions": {
         "heroEyebrow": { "label": "Hero Eyebrow", "type": "text", "value": "Our Programs" },
-        "heroTitle": { "label": "Hero Title", "type": "html", "value": "Four Pathways.<br>One Direction." },
-        "heroIntro": { "label": "Hero Intro", "type": "text", "value": "Each program is built around what young leaders actually need at a specific stage — structured enough to deliver real outcomes, flexible enough to meet people where they are." },
-        "introBodyOne": { "label": "Intro Body One", "type": "text", "value": "Too many leadership programs are built around inspiration — good speakers, a certificate, a day that felt energising and changed nothing. We're not interested in that." },
-        "introBodyTwo": { "label": "Intro Body Two", "type": "text", "value": "Every NexGen program has clear outcomes, measurable milestones, and real expectations. Participants leave with actual work in their portfolios, actual relationships in their corner, and a clearer picture of what they're capable of." }
+        "heroTitle": { "label": "Hero Title", "type": "html", "value": "Programs That<br>Build Real Leaders" },
+        "heroIntro": { "label": "Hero Intro", "type": "text", "value": "At The NexGen Leaders Foundation, we don't just advocate for change - we facilitate it through practical, structured youth development programs." },
+        "introBodyOne": { "label": "Intro Body One", "type": "text", "value": "Our programs combine academic support, life skills, mentorship, and professional exposure that students do not always receive in the standard curriculum." },
+        "introBodyTwo": { "label": "Intro Body Two", "type": "text", "value": "Success is measured by student outcomes: improved matric results, more bachelor endorsements, and stronger pathways into higher education and the professional workforce." }
       }
     },
     "team": {
       "label": "Team",
       "regions": {
-        "heroEyebrow": { "label": "Hero Eyebrow", "type": "text", "value": "The People" },
-        "heroTitle": { "label": "Hero Title", "type": "html", "value": "Driven by People<br>Who Believe in People" },
-        "heroIntro": { "label": "Hero Intro", "type": "text", "value": "Our team brings together expertise in education, community development, communications, and social finance — all united by a genuine belief that what we're building matters." }
+        "heroEyebrow": { "label": "Hero Eyebrow", "type": "text", "value": "Our Team" },
+        "heroTitle": { "label": "Hero Title", "type": "html", "value": "Built by Young Leaders<br>for Young Leaders" },
+        "heroIntro": { "label": "Hero Intro", "type": "text", "value": "NexGen Leaders Foundation is led by a growing team of young professionals committed to mentorship, education, and leadership development in local communities." }
       }
     },
     "get-involved": {
@@ -67,11 +67,11 @@
       "regions": {
         "heroEyebrow": { "label": "Hero Eyebrow", "type": "text", "value": "Get in Touch" },
         "heroTitle": { "label": "Hero Title", "type": "html", "value": "We'd Love to<br>Hear From You" },
-        "heroIntro": { "label": "Hero Intro", "type": "text", "value": "Questions about our programs, a partnership idea, a donation enquiry, or just something you want to say — our team reads every message and responds to all of them." },
-        "email": { "label": "Email", "type": "html", "value": "<a href=\"mailto:hello@nexgenleaders.org\">hello@nexgenleaders.org</a>" },
-        "phone": { "label": "Phone", "type": "html", "value": "+27 (0)11 012 3456<br><small>Mon–Fri, 8am–5pm SAST</small>" },
-        "office": { "label": "Office", "type": "html", "value": "4th Floor, 123 Jan Smuts Avenue<br>Rosebank, Johannesburg<br>2196" },
-        "social": { "label": "Social", "type": "html", "value": "<a href=\"#\">@NexGenLeaders</a> on Instagram, X (Twitter), LinkedIn &amp; Facebook" }
+        "heroIntro": { "label": "Hero Intro", "type": "text", "value": "For all enquiries, email us directly. We currently do not have a registered phone line or office address." },
+        "email": { "label": "Email", "type": "html", "value": "<a href=\"mailto:info@nexgenleaders.org\">info@nexgenleaders.org</a>" },
+        "phone": { "label": "Phone", "type": "html", "value": "No registered phone number yet." },
+        "office": { "label": "Office", "type": "html", "value": "No registered office yet." },
+        "social": { "label": "Social", "type": "html", "value": "<a href=\"https://www.instagram.com/the.ngl.foundation?igsh=cmswZmNsZ281Z3Uw\" target=\"_blank\" rel=\"noreferrer\">Instagram</a> | <a href=\"https://www.facebook.com/share/1Lpi7abQYx/\" target=\"_blank\" rel=\"noreferrer\">Facebook</a> | <a href=\"https://www.tiktok.com/@the.ngl.foundation?_r=1&_t=ZS-95tkLBU3CTg\" target=\"_blank\" rel=\"noreferrer\">TikTok</a>" }
       }
     },
     "donate": {

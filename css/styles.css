@@ -161,17 +161,7 @@ p:last-child { margin-bottom: 0; }
     overflow: hidden;
 }
 .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(
-        -45deg,
-        transparent,
-        transparent 60px,
-        rgba(216, 173, 47, 0.03) 60px,
-        rgba(216, 173, 47, 0.03) 120px
-    );
-    pointer-events: none;
+    content: none;
 }
 .hero-inner {
     position: relative;

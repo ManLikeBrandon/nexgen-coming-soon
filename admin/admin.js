@@ -1,9 +1,4 @@
-const state = {
-    activePageId: null,
-    content: null,
-    customPages: [],
-    user: null
-};
+const state = { activePageId: null, content: null, customPages: [], user: null, client: null };
 
 const loginPanel = document.getElementById('login-panel');
 const dashboard = document.getElementById('dashboard');
@@ -29,18 +24,8 @@ function escapeHtml(value = '') {
         .replace(/'/g, '&#39;');
 }
 
-async function api(path, options = {}) {
-    const response = await fetch(path, {
-        headers: { 'Content-Type': 'application/json', ...(options.headers || {}) },
-        ...options
-    });
-
-    const data = await response.json().catch(() => ({}));
-    if (!response.ok) {
-        throw new Error(data.error || 'Request failed.');
-    }
-
-    return data;
+function getConfig() {
+    return window.NEXGEN_CMS || null;
 }
 
 function showLogin() {
@@ -51,6 +36,51 @@ function showLogin() {
 function showDashboard() {
     loginPanel.hidden = true;
     dashboard.hidden = false;
+}
+
+function loadSupabaseScript() {
+    if (window.supabase && window.supabase.createClient) {
+        return Promise.resolve();
+    }
+
+    return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
+        script.onload = resolve;
+        script.onerror = () => reject(new Error('Failed to load Supabase client.'));
+        document.head.appendChild(script);
+    });
+}
+
+async function ensureClient() {
+    const config = getConfig();
+    if (!config || !config.supabaseUrl || !config.supabaseAnonKey) {
+        throw new Error('Add js/cms-config.js with your Supabase URL and anon key.');
+    }
+
+    if (state.client) {
+        return state.client;
+    }
+
+    await loadSupabaseScript();
+    state.client = window.supabase.createClient(config.supabaseUrl, config.supabaseAnonKey);
+    return state.client;
+}
+
+async function maybeSeedContent() {
+    const client = await ensureClient();
+    const { data } = await client.from('page_content').select('page_id').limit(1);
+    if (data && data.length) {
+        return;
+    }
+
+    const seed = await fetch('../data/content.json').then(response => response.json());
+    const rows = Object.entries(seed.pages).map(([pageId, page]) => ({
+        page_id: pageId,
+        label: page.label,
+        regions: page.regions
+    }));
+    await client.from('page_content').upsert(rows, { onConflict: 'page_id' });
 }
 
 function renderPageNav() {
@@ -86,10 +116,8 @@ function renderPageEditor() {
     Object.entries(page.regions).forEach(([key, region]) => {
         const group = document.createElement('div');
         group.className = 'region-group';
-
         const label = document.createElement('label');
         label.textContent = region.label;
-
         const hint = document.createElement('small');
         hint.textContent = region.type === 'html' ? 'HTML allowed' : 'Plain text';
         label.appendChild(hint);
@@ -97,7 +125,6 @@ function renderPageEditor() {
         const field = region.type === 'text' && String(region.value).length < 120
             ? document.createElement('input')
             : document.createElement('textarea');
-
         field.name = key;
         field.value = region.value;
         if (field.tagName === 'TEXTAREA') {
@@ -111,11 +138,9 @@ function renderPageEditor() {
 
     const actions = document.createElement('div');
     actions.className = 'editor-actions';
-
     const saveButton = document.createElement('button');
     saveButton.type = 'submit';
     saveButton.textContent = `Save ${page.label}`;
-
     actions.appendChild(saveButton);
     pageEditor.appendChild(regionList);
     pageEditor.appendChild(actions);
@@ -134,25 +159,24 @@ function renderCustomPages() {
         wrapper.className = 'custom-page-item';
         wrapper.innerHTML = `
             <h3>${escapeHtml(item.title)}</h3>
-            <p class="panel-copy">/${escapeHtml(item.slug)}</p>
+            <p class="panel-copy">page.html?slug=${escapeHtml(item.slug)}</p>
             <div class="custom-page-meta">
-                <a href="/pages/${encodeURIComponent(item.slug)}" target="_blank" rel="noreferrer">Preview</a>
+                <a href="../page.html?slug=${encodeURIComponent(item.slug)}" target="_blank" rel="noreferrer">Preview</a>
                 <button type="button" class="button-secondary">Edit</button>
                 <button type="button" class="button-secondary">Delete</button>
             </div>
         `;
 
-        const [previewLink, editButton, deleteButton] = wrapper.querySelectorAll('a, button');
-        void previewLink;
+        const [, editButton, deleteButton] = wrapper.querySelectorAll('a, button');
 
         editButton.addEventListener('click', () => {
             customPageForm.elements.id.value = item.id;
             customPageForm.elements.title.value = item.title;
             customPageForm.elements.slug.value = item.slug;
-            customPageForm.elements.heroTitle.value = item.heroTitle || '';
-            customPageForm.elements.heroBody.value = item.heroBody || '';
+            customPageForm.elements.heroTitle.value = item.hero_title || '';
+            customPageForm.elements.heroBody.value = item.hero_body || '';
             customPageForm.elements.excerpt.value = item.excerpt || '';
-            customPageForm.elements.contentHtml.value = item.contentHtml || '';
+            customPageForm.elements.contentHtml.value = item.content_html || '';
             customPageForm.elements.published.checked = item.published !== false;
             customStatus.textContent = `Editing ${item.title}`;
         });
@@ -162,13 +186,15 @@ function renderCustomPages() {
                 return;
             }
 
-            try {
-                await api(`/api/admin/custom-pages/${item.id}`, { method: 'DELETE' });
-                customStatus.textContent = 'Custom page deleted.';
-                await loadDashboardData();
-            } catch (error) {
+            const client = await ensureClient();
+            const { error } = await client.from('custom_pages').delete().eq('id', item.id);
+            if (error) {
                 customStatus.textContent = error.message;
+                return;
             }
+
+            customStatus.textContent = 'Custom page deleted.';
+            await loadDashboardData();
         });
 
         customPageList.appendChild(wrapper);
@@ -176,10 +202,26 @@ function renderCustomPages() {
 }
 
 async function loadDashboardData() {
-    const contentData = await api('/api/admin/content');
-    const customPageData = await api('/api/admin/custom-pages');
-    state.content = contentData;
-    state.customPages = customPageData.items || [];
+    const client = await ensureClient();
+    await maybeSeedContent();
+
+    const pageResult = await client.from('page_content').select('*').order('page_id');
+    if (pageResult.error) {
+        throw pageResult.error;
+    }
+
+    const customResult = await client.from('custom_pages').select('*').order('updated_at', { ascending: false });
+    if (customResult.error) {
+        throw customResult.error;
+    }
+
+    state.content = {
+        pages: Object.fromEntries((pageResult.data || []).map(item => [item.page_id, {
+            label: item.label,
+            regions: item.regions || {}
+        }]))
+    };
+    state.customPages = customResult.data || [];
     state.activePageId = state.activePageId || Object.keys(state.content.pages)[0];
     renderPageNav();
     renderPageEditor();
@@ -191,15 +233,16 @@ loginForm.addEventListener('submit', async event => {
     loginStatus.textContent = 'Signing in...';
 
     try {
+        const client = await ensureClient();
         const formData = new FormData(loginForm);
         const payload = Object.fromEntries(formData.entries());
-        const response = await api('/api/login', {
-            method: 'POST',
-            body: JSON.stringify(payload)
-        });
+        const { data, error } = await client.auth.signInWithPassword({ email: payload.email, password: payload.password });
+        if (error) {
+            throw error;
+        }
 
-        state.user = response.email;
-        signedInAs.textContent = response.email;
+        state.user = data.user.email;
+        signedInAs.textContent = data.user.email;
         loginStatus.textContent = '';
         showDashboard();
         await loadDashboardData();
@@ -210,54 +253,68 @@ loginForm.addEventListener('submit', async event => {
 
 pageEditor.addEventListener('submit', async event => {
     event.preventDefault();
-
     if (!state.activePageId) {
         return;
     }
 
-    const formData = new FormData(pageEditor);
-    const regions = Object.fromEntries(formData.entries());
     saveStatus.textContent = 'Saving...';
+    const client = await ensureClient();
+    const formData = new FormData(pageEditor);
+    const page = state.content.pages[state.activePageId];
+    const nextRegions = JSON.parse(JSON.stringify(page.regions));
+    Object.entries(Object.fromEntries(formData.entries())).forEach(([key, value]) => {
+        if (nextRegions[key]) {
+            nextRegions[key].value = value;
+        }
+    });
 
-    try {
-        await api(`/api/admin/content/${state.activePageId}`, {
-            method: 'PUT',
-            body: JSON.stringify({ regions })
-        });
+    const { error } = await client.from('page_content').upsert({
+        page_id: state.activePageId,
+        label: page.label,
+        regions: nextRegions
+    }, { onConflict: 'page_id' });
 
-        saveStatus.textContent = 'Saved.';
-        await loadDashboardData();
-    } catch (error) {
+    if (error) {
         saveStatus.textContent = error.message;
+        return;
     }
-});
+
+    saveStatus.textContent = 'Saved.';
+    await loadDashboardData();
+}
 
 customPageForm.addEventListener('submit', async event => {
     event.preventDefault();
-
+    const client = await ensureClient();
     const formData = new FormData(customPageForm);
     const payload = Object.fromEntries(formData.entries());
-    payload.published = customPageForm.elements.published.checked;
     const id = payload.id;
     delete payload.id;
+    payload.published = customPageForm.elements.published.checked;
+    payload.hero_title = payload.heroTitle || '';
+    payload.hero_body = payload.heroBody || '';
+    payload.content_html = payload.contentHtml || '';
+    delete payload.heroTitle;
+    delete payload.heroBody;
+    delete payload.contentHtml;
+
     customStatus.textContent = 'Saving custom page...';
 
-    try {
-        const path = id ? `/api/admin/custom-pages/${id}` : '/api/admin/custom-pages';
-        const method = id ? 'PUT' : 'POST';
-        await api(path, {
-            method,
-            body: JSON.stringify(payload)
-        });
+    const query = client.from('custom_pages');
+    const result = id
+        ? await query.update(payload).eq('id', id)
+        : await query.insert(payload);
 
-        customStatus.textContent = id ? 'Custom page updated.' : 'Custom page created.';
-        customPageForm.reset();
-        customPageForm.elements.id.value = '';
-        customPageForm.elements.published.checked = true;
-        await loadDashboardData();
-    } catch (error) {
-        customStatus.textContent = error.message;
+    if (result.error) {
+        customStatus.textContent = result.error.message;
+        return;
     }
+
+    customStatus.textContent = id ? 'Custom page updated.' : 'Custom page created.';
+    customPageForm.reset();
+    customPageForm.elements.id.value = '';
+    customPageForm.elements.published.checked = true;
+    await loadDashboardData();
 });
 
 customReset.addEventListener('click', () => {
@@ -268,7 +325,8 @@ customReset.addEventListener('click', () => {
 });
 
 logoutButton.addEventListener('click', async () => {
-    await api('/api/logout', { method: 'POST' });
+    const client = await ensureClient();
+    await client.auth.signOut();
     state.user = null;
     showLogin();
     loginForm.reset();
@@ -276,18 +334,23 @@ logoutButton.addEventListener('click', async () => {
 
 async function boot() {
     try {
-        const response = await api('/api/me', { method: 'GET' });
-        if (!response.authenticated) {
+        const client = await ensureClient();
+        const { data, error } = await client.auth.getUser();
+        if (error || !data.user) {
             showLogin();
+            if (!getConfig() || !getConfig().supabaseUrl) {
+                loginStatus.textContent = 'Add js/cms-config.js before using the admin dashboard.';
+            }
             return;
         }
 
-        state.user = response.email;
-        signedInAs.textContent = response.email;
+        state.user = data.user.email;
+        signedInAs.textContent = data.user.email;
         showDashboard();
         await loadDashboardData();
     } catch (error) {
         showLogin();
+        loginStatus.textContent = error.message;
     }
 }
 

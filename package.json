@@ -1,9 +1,0 @@
-{
-  "name": "nexgen-leaders-site",
-  "version": "1.0.0",
-  "private": true,
-  "description": "NexGen Leaders website with Phase 1 admin backend and custom page builder.",
-  "scripts": {
-    "start": "node server.js"
-  }
-}

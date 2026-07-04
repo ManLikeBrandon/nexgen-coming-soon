@@ -1,35 +1,54 @@
 # nexgen-coming-soon
 
-## Phase 1 Backend
+## Phase 1 CMS
 
-This project now includes a lightweight Node backend with:
+This project now uses a static-site-friendly CMS approach:
 
-- Admin login with cookie-based sessions
-- Editable page regions for the main public pages
-- A custom page builder for new pages served at `/pages/:slug`
-- Static site serving from the same backend
+- Public pages remain plain HTML
+- Admin login is handled by Supabase Auth
+- Editable page content is stored in Supabase tables
+- Custom pages can be created from the admin dashboard
 
-## Run Locally
+No local Node server is required to run the site.
 
-1. Install Node.js 18+ if it is not already available.
-2. Optionally create a local `.env` file using `.env.example`.
-3. Start the server:
+## Setup
 
-```bash
-npm start
+1. Create a Supabase project.
+2. Run the SQL in `supabase/schema.sql` in the Supabase SQL editor.
+3. Copy `js/cms-config.example.js` to `js/cms-config.js`.
+4. Add your Supabase project URL and anon key.
+5. Open `admin/index.html` through your static host or local static preview.
+
+## Login
+
+Admin login is now managed by Supabase Auth.
+
+- Create admin users in the Supabase dashboard.
+- Use email/password sign-in from the admin page.
+
+## Editable Content
+
+The admin dashboard edits seeded content regions for:
+
+- Home
+- About
+- Programs
+- Team
+- Get Involved
+- Contact
+- Donate
+
+The default region structure is stored in `data/content.json` and can be used to seed the database.
+
+## Custom Pages
+
+Custom pages are created in the admin dashboard and rendered through:
+
+```text
+page.html?slug=your-slug
 ```
 
-4. Open the site at `http://localhost:3000`
-5. Open the admin dashboard at `http://localhost:3000/admin`
-
-## Default Admin Login
-
-If `data/users.json` does not exist, the server creates a default admin user on first run using:
-
-- `ADMIN_EMAIL` from environment, or `admin@nexgenleaders.org`
-- `ADMIN_PASSWORD` from environment, or `ChangeMe123!`
-
-Change these immediately for any real deployment.
+This route format works cleanly on static hosting platforms, including GitHub Pages.
 
 ## Editable Content
 

@@ -7,8 +7,9 @@
     <meta name="description" content="Apply to a program, become a mentor, volunteer, or partner with the NexGen Leaders Foundation.">
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;1,9..40,400&family=Permanent+Marker&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
+    <script src="js/content-loader.js" defer></script>
 </head>
-<body>
+<body data-page="get-involved">
 
 <nav class="nav" id="main-nav">
     <a class="nav-brand" href="main.html">
@@ -33,9 +34,9 @@
         <div class="breadcrumb">
             <a href="main.html">Home</a> &nbsp;/&nbsp; <span>Get Involved</span>
         </div>
-        <span class="eyebrow">Join Us</span>
-        <h1>Find Your Place<br>in the Work</h1>
-        <p>How to engage is simple: apply as a student, register as a mentor, volunteer your skills, or partner with us to strengthen youth leadership in our communities.</p>
+        <span class="eyebrow" data-region="heroEyebrow">Join Us</span>
+        <h1 data-region="heroTitle" data-render="html">Find Your Place<br>in the Work</h1>
+        <p data-region="heroIntro">How to engage is simple: apply as a student, register as a mentor, volunteer your skills, or partner with us to strengthen youth leadership in our communities.</p>
     </div>
 </div>
 
@@ -44,7 +45,7 @@
         <span class="section-eyebrow">How to Engage</span>
         <h2 class="section-title">Four Ways to <span class="accent">Get Involved</span></h2>
         <div class="section-bar"></div>
-        <p class="involve-section-intro">
+        <p class="involve-section-intro" data-region="pageIntro">
             We run two application intakes each year. If applications are closed when you apply,
             your submission is held for the next review round and you will receive updates by email.
         </p>
@@ -115,8 +116,8 @@
                     </div>
                 </div>
                 <div class="callout">
-                    <div class="callout-accent">2026 Intake Windows</div>
-                    <p>Intake 1: February to March. Intake 2: August to September. Early applications are encouraged.</p>
+                    <div class="callout-accent" data-region="intakeCalloutTitle">2026 Intake Windows</div>
+                    <p data-region="intakeCalloutBody">Intake 1: February to March. Intake 2: August to September. Early applications are encouraged.</p>
                 </div>
                 <p class="form-note">Mentorship applications are currently reviewed manually by our core team to ensure strong student-mentor matching.</p>
             </div>

@@ -7,10 +7,10 @@
     <meta name="description" content="Learn about the NexGen Leaders Foundation — our story, mission, vision, and the values that guide everything we do.">
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;1,9..40,400&family=Permanent+Marker&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
+    <script src="js/content-loader.js" defer></script>
 </head>
-<body>
+<body data-page="about">
 
-<!-- ============ NAVIGATION ============ -->
 <nav class="nav" id="main-nav">
     <a class="nav-brand" href="main.html">
         <img src="Nexgen (1).png" alt="NexGen Leaders Foundation">
@@ -29,65 +29,52 @@
     </button>
 </nav>
 
-<!-- ============ PAGE HERO ============ -->
 <div class="page-hero">
     <div class="page-hero-inner">
         <div class="breadcrumb">
             <a href="main.html">Home</a> &nbsp;/&nbsp; <span>About Us</span>
         </div>
-        <span class="eyebrow">Who We Are</span>
-        <h1>Our Story, Mission<br>&amp; Vision</h1>
-        <p>The NexGen Leaders Foundation (NGL) is a non-profit company led by young professionals and emerging leaders who are committed to empowering youth in the Southern Suburbs.</p>
+        <span class="eyebrow" data-region="heroEyebrow">Who We Are</span>
+        <h1 data-region="heroTitle" data-render="html">Our Story, Mission<br>&amp; Vision</h1>
+        <p data-region="heroIntro">The NexGen Leaders Foundation (NGL) is a non-profit company led by young professionals and emerging leaders who are committed to empowering youth in the Southern Suburbs.</p>
     </div>
 </div>
 
-<!-- ============ OUR STORY ============ -->
 <section class="section">
     <div class="section-inner">
         <div class="two-col">
             <div>
                 <span class="section-eyebrow">How It Started</span>
-                <h2 class="section-title">Built on a <span class="accent">Simple Observation</span></h2>
+                <h2 class="section-title" data-region="storyTitle" data-render="html">Built on a <span class="accent">Simple Observation</span></h2>
                 <div class="section-bar"></div>
-                <p class="prose">
-                    NexGen Leaders Foundation began with a simple but powerful realization: there is an abundance
-                    of talent in our local schools, but a shortage of the guidance needed to unlock it.
-                </p>
-                <p class="prose">
-                    In early 2026, the foundation was established by Amber Dreyer and Michai Mentor.
-                    They saw recurring gaps in the Southern Suburbs, where ambitious students had potential
-                    but not always a clear roadmap into higher education and professional opportunities.
-                </p>
-                <p class="prose prose-mb2">
-                    What started as a shared vision for getting the underprivileged educated evolved into
-                    a structured movement that pairs mentorship, leadership development, and community support
-                    for students who need it most.
-                </p>
+                <p class="prose" data-region="storyBodyOne">NexGen Leaders Foundation began with a simple but powerful realization: there is an abundance of talent in our local schools, but a shortage of the guidance needed to unlock it.</p>
+                <p class="prose" data-region="storyBodyTwo">In early 2026, the foundation was established by Amber Dreyer and Michai Mentor. They saw recurring gaps in the Southern Suburbs, where ambitious students had potential but not always a clear roadmap into higher education and professional opportunities.</p>
+                <p class="prose prose-mb2" data-region="storyBodyThree">What started as a shared vision for getting the underprivileged educated evolved into a structured movement that pairs mentorship, leadership development, and community support for students who need it most.</p>
                 <a href="programs.html" class="btn btn-black">See Our Programs</a>
             </div>
             <div>
                 <div class="callout">
-                    <div class="callout-accent">Our Focus Schools</div>
-                    <p>Steenberg High School, Sibelius High School, Crestway High School, Lavender Hill High School, Heathfield High School, and Pelican Park High School.</p>
+                    <div class="callout-accent" data-region="focusSchoolsTitle">Our Focus Schools</div>
+                    <p data-region="focusSchoolsBody">Steenberg High School, Sibelius High School, Crestway High School, Lavender Hill High School, Heathfield High School, and Pelican Park High School.</p>
                 </div>
                 <div class="dark-panel">
                     <div class="dark-panel-eyebrow">Foundation Timeline</div>
                     <div class="timeline">
                         <div class="timeline-item">
-                            <span class="timeline-year">2019</span>
-                            <span class="timeline-text">Foundation established. First cohort of 30 young people enrolled in the Leadership Academy pilot.</span>
+                            <span class="timeline-year">2026</span>
+                            <span class="timeline-text">Foundation established by Amber Dreyer and Michai Mentor.</span>
                         </div>
                         <div class="timeline-item">
-                            <span class="timeline-year">2020</span>
-                            <span class="timeline-text">Mentorship Network launched. Programs moved online during the pandemic — no cohort was cancelled.</span>
+                            <span class="timeline-year">2026</span>
+                            <span class="timeline-text">Mentorship and educational support launched across six core schools in the Southern Suburbs.</span>
                         </div>
                         <div class="timeline-item">
-                            <span class="timeline-year">2022</span>
-                            <span class="timeline-text">Youth Impact Grants launched. Over R80 000 disbursed to 14 youth-led community projects in year one.</span>
+                            <span class="timeline-year">Now</span>
+                            <span class="timeline-text">Growing a sustainable movement of youth mentorship, leadership, and community pride.</span>
                         </div>
                         <div class="timeline-item">
-                            <span class="timeline-year">2024</span>
-                            <span class="timeline-text">Expanded to 15 communities. 500+ alumni. First Annual NexGen Leadership Summit draws 300+ people.</span>
+                            <span class="timeline-year">Next</span>
+                            <span class="timeline-text">Expanding mentorship reach and strengthening pathways from school to higher education and careers.</span>
                         </div>
                     </div>
                 </div>
@@ -96,46 +83,35 @@
     </div>
 </section>
 
-                            <span class="timeline-year">2026</span>
-                            <span class="timeline-text">Foundation established by Amber Dreyer and Michai Mentor.</span>
+<section class="section section-grey">
     <div class="section-inner">
         <div class="section-center-wrap text-center mb-2">
-                            <span class="timeline-year">2026</span>
-                            <span class="timeline-text">Mentorship and educational support launched across six core schools in the Southern Suburbs.</span>
+            <span class="section-eyebrow">Why We Exist</span>
+            <h2 class="section-title">Mission &amp; <span class="accent">Vision</span></h2>
             <div class="section-bar section-bar-center"></div>
         </div>
-                            <span class="timeline-year">Now</span>
-                            <span class="timeline-text">Growing a sustainable movement of youth mentorship, leadership, and community pride.</span>
+        <div class="two-col">
+            <div class="mission-box">
                 <span class="box-eyebrow">Our Mission</span>
-                <h3>To develop young leaders who are skilled, self-aware, and genuinely ready to build something.</h3>
-                            <span class="timeline-year">Next</span>
-                            <span class="timeline-text">Expanding mentorship reach and strengthening pathways from school to higher education and careers.</span>
-                    stays active long after formal programs end.
-                </p>
+                <h3>To empower young people through mentorship, leadership development, and real-world exposure.</h3>
+                <p class="prose-panel" data-region="missionText">Through real programs, honest mentorship, access to funding, and a community that stays active long after formal programs end.</p>
             </div>
             <div class="vision-box">
                 <span class="box-eyebrow">Our Vision</span>
                 <h3>Communities shaped by young leaders who know what they stand for and have the tools to act on it.</h3>
-                <p class="prose-panel">
-                    A future where every young person has access to guidance, opportunity, and a
-                    clear pathway to success, regardless of background or circumstance.
-                </p>
+                <p class="prose-panel" data-region="visionText">A future where every young person has access to guidance, opportunity, and a clear pathway to success, regardless of background or circumstance.</p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ============ CORE VALUES ============ -->
 <section class="section">
     <div class="section-inner">
         <div class="section-center-wrap text-center mb-2">
             <span class="section-eyebrow">Governance</span>
             <h2 class="section-title">How We Stay <span class="accent">Accountable</span></h2>
             <div class="section-bar section-bar-center"></div>
-            <p class="prose">
-                Trust matters. We report outcomes, track participant progress, and regularly review programs
-                with mentors, partners, and alumni to improve quality year after year.
-            </p>
+            <p class="prose">Trust matters. We report outcomes, track participant progress, and regularly review programs with mentors, partners, and alumni to improve quality year after year.</p>
         </div>
         <div class="cards-grid cards-grid-3">
             <div class="card">
@@ -193,26 +169,21 @@
     </div>
 </section>
 
-<!-- ============ TEAM CTA ============ -->
 <div class="cta-section">
     <h2>Meet the People<br><span>Behind the Work</span></h2>
-    <p>
-        Our board, leadership team, and advisors bring deep experience across education,
-        business, and community development to guide every program responsibly.
-    </p>
+    <p>Our board, leadership team, and advisors bring deep experience across education, business, and community development to guide every program responsibly.</p>
     <div class="cta-actions">
         <a href="team.html" class="btn btn-black btn-lg">Meet Our Team</a>
         <a href="get-involved.html" class="btn btn-lg btn-ghost-black">Get Involved</a>
     </div>
 </div>
 
-<!-- ============ FOOTER ============ -->
 <footer class="footer">
     <div class="footer-inner">
         <div class="footer-grid">
             <div class="footer-brand">
                 <img src="Nexgen (1).png" alt="NexGen Leaders Foundation" class="footer-brand-logo">
-                <p>Developing the next generation of leaders through structured programs, mentorship, and community — since 2019.</p>
+                <p>Developing the next generation of leaders through structured programs, mentorship, and community — since 2026.</p>
                 <div class="footer-slogan">Rise. Lead. Succeed.</div>
             </div>
             <div class="footer-col">
@@ -244,7 +215,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2025 The NexGen Leaders Foundation. Registered Non-Profit Organisation.</p>
+            <p>&copy; 2026 The NexGen Leaders Foundation. Registered Non-Profit Organisation.</p>
             <div class="footer-bottom-links">
                 <a href="#">Privacy Policy</a>
                 <a href="#">Terms of Use</a>
@@ -256,7 +227,7 @@
 
 <script>
     const toggle = document.getElementById('nav-toggle');
-    const links  = document.getElementById('nav-links');
+    const links = document.getElementById('nav-links');
     toggle.addEventListener('click', () => links.classList.toggle('open'));
     document.querySelectorAll('.nav-links a').forEach(a => {
         a.addEventListener('click', () => links.classList.remove('open'));

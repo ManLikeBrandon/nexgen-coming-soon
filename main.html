@@ -7,8 +7,9 @@
     <meta name="description" content="The NexGen Leaders Foundation develops young leaders through structured programs, mentorship, and community. Based in South Africa.">
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;1,9..40,400&family=Permanent+Marker&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
+    <script src="js/content-loader.js" defer></script>
 </head>
-<body>
+<body data-page="main">
 
 <!-- ============ NAVIGATION ============ -->
 <nav class="nav" id="main-nav">
@@ -32,9 +33,9 @@
 <!-- ============ HERO ============ -->
 <section class="hero">
     <div class="hero-inner">
-        <span class="hero-eyebrow">Rise. Lead. Succeed.</span>
-        <h1>Shaping<br><span class="hl">Tomorrow's</span><br>Leaders Today</h1>
-        <p class="hero-sub">
+        <span class="hero-eyebrow" data-region="heroEyebrow">Rise. Lead. Succeed.</span>
+        <h1 data-region="heroTitle" data-render="html">Shaping<br><span class="hl">Tomorrow's</span><br>Leaders Today</h1>
+        <p class="hero-sub" data-region="heroSubtitle">
             We work with ambitious young people — 16 to 25 — who are ready to lead
             but need the right structure, the right mentors, and the right room to grow.
             That's what we build.
@@ -73,15 +74,15 @@
     <div class="section-inner">
         <div class="two-col">
             <div>
-                <span class="section-eyebrow">Who We Are</span>
-                <h2 class="section-title">Built for the <span class="accent">People Who Come Next</span></h2>
+                <span class="section-eyebrow" data-region="missionEyebrow">Who We Are</span>
+                <h2 class="section-title" data-region="missionTitle" data-render="html">Built for the <span class="accent">People Who Come Next</span></h2>
                 <div class="section-bar"></div>
-                <p class="prose">
+                <p class="prose" data-region="missionBodyOne">
                     We're a nonprofit that develops young leaders. Not through inspiration posters and
                     one-day workshops, but through real programs with clear structure — and the
                     expectation that participants will do the work.
                 </p>
-                <p class="prose prose-mb2">
+                <p class="prose prose-mb2" data-region="missionBodyTwo">
                     We believe potential is everywhere. The right conditions for it are not.
                     Our job is to build those conditions, then get out of the way.
                 </p>
@@ -129,7 +130,7 @@
         <span class="section-eyebrow">Our Programs</span>
         <h2 class="section-title">Our <span class="accent">Programs</span></h2>
         <div class="section-bar"></div>
-        <p class="section-lead">
+        <p class="section-lead" data-region="programsLead">
             Four programs. Each one built around what young leaders actually need — not what looks good in a brochure.
         </p>
         <div class="cards-grid">
@@ -171,7 +172,7 @@
 <!-- ============ PULL QUOTE ============ -->
 <div class="pull-quote">
     <blockquote>
-        <p>"The world doesn't need more followers.<br>It needs <span class="hl">leaders who know why they lead.</span>"</p>
+        <p data-region="quoteHtml" data-render="html">"The world doesn't need more followers.<br>It needs <span class="hl">leaders who know why they lead.</span>"</p>
         <cite>— NexGen Leaders Foundation</cite>
     </blockquote>
 </div>
@@ -183,7 +184,7 @@
             <span class="section-eyebrow">Join the Movement</span>
             <h2 class="section-title">There's a Place <span class="accent">For You Here</span></h2>
             <div class="section-bar section-bar-center"></div>
-            <p class="prose prose-mb3">
+            <p class="prose prose-mb3" data-region="joinMovementBody">
                 Whether you want to join a program, mentor someone, or put money behind work
                 that actually matters — we'll find the right fit.
             </p>
@@ -213,8 +214,8 @@
 
 <!-- ============ DONATE CTA ============ -->
 <div class="cta-section">
-    <h2>Every Rand You Give<br>Builds a Leader</h2>
-    <p>
+    <h2 data-region="donateCtaTitle" data-render="html">Every Rand You Give<br>Builds a Leader</h2>
+    <p data-region="donateCtaBody">
         Scholarships, mentorship, and grants for young people doing real work.
         That's where your money goes.
     </p>

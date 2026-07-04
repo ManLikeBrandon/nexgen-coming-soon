@@ -7,8 +7,9 @@
     <meta name="description" content="Get in touch with the NexGen Leaders Foundation. Questions about programs, partnerships, donations, or anything else — we'll respond.">
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;1,9..40,400&family=Permanent+Marker&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
+    <script src="js/content-loader.js" defer></script>
 </head>
-<body>
+<body data-page="contact">
 
 <nav class="nav" id="main-nav">
     <a class="nav-brand" href="main.html">
@@ -33,9 +34,9 @@
         <div class="breadcrumb">
             <a href="main.html">Home</a> &nbsp;/&nbsp; <span>Contact</span>
         </div>
-        <span class="eyebrow">Get in Touch</span>
-        <h1>We'd Love to<br>Hear From You</h1>
-        <p>Questions about our programs, a partnership idea, a donation enquiry, or just something you want to say — our team reads every message and responds to all of them.</p>
+        <span class="eyebrow" data-region="heroEyebrow">Get in Touch</span>
+        <h1 data-region="heroTitle" data-render="html">We'd Love to<br>Hear From You</h1>
+        <p data-region="heroIntro">Questions about our programs, a partnership idea, a donation enquiry, or just something you want to say — our team reads every message and responds to all of them.</p>
     </div>
 </div>
 
@@ -52,28 +53,28 @@
                     <div class="contact-icon">📧</div>
                     <div>
                         <h4>Email</h4>
-                        <p><a href="mailto:hello@nexgenleaders.org">hello@nexgenleaders.org</a></p>
+                        <p data-region="email" data-render="html"><a href="mailto:hello@nexgenleaders.org">hello@nexgenleaders.org</a></p>
                     </div>
                 </div>
                 <div class="contact-detail">
                     <div class="contact-icon">📞</div>
                     <div>
                         <h4>Phone</h4>
-                        <p>+27 (0)11 012 3456<br><small>Mon–Fri, 8am–5pm SAST</small></p>
+                        <p data-region="phone" data-render="html">+27 (0)11 012 3456<br><small>Mon–Fri, 8am–5pm SAST</small></p>
                     </div>
                 </div>
                 <div class="contact-detail">
                     <div class="contact-icon">📍</div>
                     <div>
                         <h4>Office</h4>
-                        <p>4th Floor, 123 Jan Smuts Avenue<br>Rosebank, Johannesburg<br>2196</p>
+                        <p data-region="office" data-render="html">4th Floor, 123 Jan Smuts Avenue<br>Rosebank, Johannesburg<br>2196</p>
                     </div>
                 </div>
                 <div class="contact-detail">
                     <div class="contact-icon">🌐</div>
                     <div>
                         <h4>Social Media</h4>
-                        <p><a href="#">@NexGenLeaders</a> on Instagram, X (Twitter), LinkedIn &amp; Facebook</p>
+                        <p data-region="social" data-render="html"><a href="#">@NexGenLeaders</a> on Instagram, X (Twitter), LinkedIn &amp; Facebook</p>
                     </div>
                 </div>
 

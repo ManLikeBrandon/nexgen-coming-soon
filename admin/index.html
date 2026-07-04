@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexGen Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="admin/admin.css">
+</head>
+<body>
+    <main class="admin-shell">
+        <section class="login-panel" id="login-panel">
+            <div class="panel-card panel-card-narrow">
+                <p class="eyebrow">Admin Access</p>
+                <h1>NexGen Content Admin</h1>
+                <p class="panel-copy">Log in to update site content and build new public pages.</p>
+                <form id="login-form">
+                    <label>
+                        Email
+                        <input type="email" name="email" placeholder="admin@nexgenleaders.org" required>
+                    </label>
+                    <label>
+                        Password
+                        <input type="password" name="password" placeholder="Enter password" required>
+                    </label>
+                    <button type="submit">Log In</button>
+                    <p class="status-message" id="login-status"></p>
+                </form>
+            </div>
+        </section>
+
+        <section class="dashboard" id="dashboard" hidden>
+            <header class="dashboard-header">
+                <div>
+                    <p class="eyebrow">Phase 1 CMS</p>
+                    <h1>Content Dashboard</h1>
+                </div>
+                <div class="header-actions">
+                    <span class="signed-in-as" id="signed-in-as"></span>
+                    <button type="button" class="button-secondary" id="logout-button">Log Out</button>
+                </div>
+            </header>
+
+            <div class="dashboard-grid">
+                <aside class="panel-card sidebar">
+                    <h2>Editable Pages</h2>
+                    <div class="nav-stack" id="page-nav"></div>
+                </aside>
+
+                <section class="panel-card editor-panel">
+                    <div class="editor-head">
+                        <div>
+                            <p class="eyebrow">Existing Content</p>
+                            <h2 id="editor-title">Select a page</h2>
+                        </div>
+                        <p class="status-message" id="save-status"></p>
+                    </div>
+                    <form id="page-editor"></form>
+                </section>
+            </div>
+
+            <section class="panel-card custom-pages-panel">
+                <div class="custom-pages-header">
+                    <div>
+                        <p class="eyebrow">Page Builder</p>
+                        <h2>Custom Pages</h2>
+                    </div>
+                    <p class="panel-copy">Create new public pages that will be served at <strong>/pages/your-slug</strong>.</p>
+                </div>
+
+                <div class="custom-pages-grid">
+                    <div>
+                        <div class="custom-page-list" id="custom-page-list"></div>
+                    </div>
+
+                    <form id="custom-page-form" class="custom-page-form">
+                        <input type="hidden" name="id">
+                        <label>
+                            Page Title
+                            <input type="text" name="title" placeholder="Mentor Stories" required>
+                        </label>
+                        <label>
+                            Slug
+                            <input type="text" name="slug" placeholder="mentor-stories" required>
+                        </label>
+                        <label>
+                            Hero Title
+                            <textarea name="heroTitle" rows="2" placeholder="Mentor Stories"></textarea>
+                        </label>
+                        <label>
+                            Hero Summary
+                            <textarea name="heroBody" rows="3" placeholder="Short intro shown in the page hero."></textarea>
+                        </label>
+                        <label>
+                            Excerpt
+                            <textarea name="excerpt" rows="2" placeholder="Short summary used for metadata and previews."></textarea>
+                        </label>
+                        <label>
+                            Page Body HTML
+                            <textarea name="contentHtml" rows="12" placeholder="<h2>Start here</h2><p>Add your content.</p>"></textarea>
+                        </label>
+                        <label class="checkbox-row">
+                            <input type="checkbox" name="published" checked>
+                            <span>Published</span>
+                        </label>
+                        <div class="button-row">
+                            <button type="submit">Save Custom Page</button>
+                            <button type="button" class="button-secondary" id="custom-reset">Clear Form</button>
+                        </div>
+                        <p class="status-message" id="custom-status"></p>
+                    </form>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <script src="admin/admin.js" defer></script>
+</body>
+</html>

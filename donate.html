@@ -7,8 +7,9 @@
     <meta name="description" content="Support the NexGen Leaders Foundation. Donation gateway and EFT options are being finalized; register your interest to give.">
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;1,9..40,400&family=Permanent+Marker&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
+    <script src="js/content-loader.js" defer></script>
 </head>
-<body>
+<body data-page="donate">
 
 <nav class="nav" id="main-nav">
     <a class="nav-brand" href="main.html">
@@ -33,9 +34,9 @@
         <div class="breadcrumb">
             <a href="main.html">Home</a> &nbsp;/&nbsp; <span>Donate</span>
         </div>
-        <span class="eyebrow">Support Our Work</span>
-        <h1>Invest in the<br>Next Generation</h1>
-        <p>Our online gateway and EFT options are being finalized. You can still view impact levels and register your interest to donate.</p>
+        <span class="eyebrow" data-region="heroEyebrow">Support Our Work</span>
+        <h1 data-region="heroTitle" data-render="html">Invest in the<br>Next Generation</h1>
+        <p data-region="heroIntro">Our online gateway and EFT options are being finalized. You can still view impact levels and register your interest to donate.</p>
     </div>
 </div>
 
@@ -46,7 +47,7 @@
                 <span class="section-eyebrow">Your Impact</span>
                 <h2 class="section-title">What Your<br><span class="accent">Gift Does</span></h2>
                 <div class="section-bar"></div>
-                <p class="donate-intro-text">
+                <p class="donate-intro-text" data-region="impactIntro">
                     Our goal is to direct the majority of donations into mentorship, academic support,
                     and youth leadership development for students in our focus schools.
                 </p>
@@ -84,8 +85,8 @@
                 </div>
 
                 <div class="callout">
-                    <div class="callout-accent">Donation Access Update</div>
-                    <p>Card and EFT donations are temporarily unavailable while banking setup is completed. Please leave your details and our team will contact you when giving is live.</p>
+                    <div class="callout-accent" data-region="updateTitle">Donation Access Update</div>
+                    <p data-region="updateBody">Card and EFT donations are temporarily unavailable while banking setup is completed. Please leave your details and our team will contact you when giving is live.</p>
                 </div>
             </div>
 

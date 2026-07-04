@@ -1,0 +1,90 @@
+{
+  "pages": {
+    "main": {
+      "label": "Home",
+      "regions": {
+        "heroEyebrow": { "label": "Hero Eyebrow", "type": "text", "value": "Rise. Lead. Succeed." },
+        "heroTitle": { "label": "Hero Title", "type": "html", "value": "Shaping<br><span class=\"hl\">Tomorrow's</span><br>Leaders Today" },
+        "heroSubtitle": { "label": "Hero Subtitle", "type": "text", "value": "We work with ambitious young people — 16 to 25 — who are ready to lead but need the right structure, the right mentors, and the right room to grow. That's what we build." },
+        "missionEyebrow": { "label": "Mission Eyebrow", "type": "text", "value": "Who We Are" },
+        "missionTitle": { "label": "Mission Title", "type": "html", "value": "Built for the <span class=\"accent\">People Who Come Next</span>" },
+        "missionBodyOne": { "label": "Mission Body One", "type": "text", "value": "We're a nonprofit that develops young leaders. Not through inspiration posters and one-day workshops, but through real programs with clear structure — and the expectation that participants will do the work." },
+        "missionBodyTwo": { "label": "Mission Body Two", "type": "text", "value": "We believe potential is everywhere. The right conditions for it are not. Our job is to build those conditions, then get out of the way." },
+        "programsLead": { "label": "Programs Lead", "type": "text", "value": "Four programs. Each one built around what young leaders actually need — not what looks good in a brochure." },
+        "quoteHtml": { "label": "Quote", "type": "html", "value": "\"The world doesn't need more followers.<br>It needs <span class=\"hl\">leaders who know why they lead.</span>\"" },
+        "joinMovementBody": { "label": "Join Movement Body", "type": "text", "value": "Whether you want to join a program, mentor someone, or put money behind work that actually matters — we'll find the right fit." },
+        "donateCtaTitle": { "label": "Donate CTA Title", "type": "html", "value": "Every Rand You Give<br>Builds a Leader" },
+        "donateCtaBody": { "label": "Donate CTA Body", "type": "text", "value": "Scholarships, mentorship, and grants for young people doing real work. That's where your money goes." }
+      }
+    },
+    "about": {
+      "label": "About",
+      "regions": {
+        "heroEyebrow": { "label": "Hero Eyebrow", "type": "text", "value": "Who We Are" },
+        "heroTitle": { "label": "Hero Title", "type": "html", "value": "Our Story, Mission<br>&amp; Vision" },
+        "heroIntro": { "label": "Hero Intro", "type": "text", "value": "The NexGen Leaders Foundation (NGL) is a non-profit company led by young professionals and emerging leaders who are committed to empowering youth in the Southern Suburbs." },
+        "storyTitle": { "label": "Story Title", "type": "html", "value": "Built on a <span class=\"accent\">Simple Observation</span>" },
+        "storyBodyOne": { "label": "Story Body One", "type": "text", "value": "NexGen Leaders Foundation began with a simple but powerful realization: there is an abundance of talent in our local schools, but a shortage of the guidance needed to unlock it." },
+        "storyBodyTwo": { "label": "Story Body Two", "type": "text", "value": "In early 2026, the foundation was established by Amber Dreyer and Michai Mentor. They saw recurring gaps in the Southern Suburbs, where ambitious students had potential but not always a clear roadmap into higher education and professional opportunities." },
+        "storyBodyThree": { "label": "Story Body Three", "type": "text", "value": "What started as a shared vision for getting the underprivileged educated evolved into a structured movement that pairs mentorship, leadership development, and community support for students who need it most." },
+        "focusSchoolsTitle": { "label": "Focus Schools Title", "type": "text", "value": "Our Focus Schools" },
+        "focusSchoolsBody": { "label": "Focus Schools Body", "type": "text", "value": "Steenberg High School, Sibelius High School, Crestway High School, Lavender Hill High School, Heathfield High School, and Pelican Park High School." },
+        "missionText": { "label": "Mission Text", "type": "text", "value": "Through real programs, honest mentorship, access to funding, and a community that stays active long after formal programs end." },
+        "visionText": { "label": "Vision Text", "type": "text", "value": "A future where every young person has access to guidance, opportunity, and a clear pathway to success, regardless of background or circumstance." }
+      }
+    },
+    "programs": {
+      "label": "Programs",
+      "regions": {
+        "heroEyebrow": { "label": "Hero Eyebrow", "type": "text", "value": "Our Programs" },
+        "heroTitle": { "label": "Hero Title", "type": "html", "value": "Four Pathways.<br>One Direction." },
+        "heroIntro": { "label": "Hero Intro", "type": "text", "value": "Each program is built around what young leaders actually need at a specific stage — structured enough to deliver real outcomes, flexible enough to meet people where they are." },
+        "introBodyOne": { "label": "Intro Body One", "type": "text", "value": "Too many leadership programs are built around inspiration — good speakers, a certificate, a day that felt energising and changed nothing. We're not interested in that." },
+        "introBodyTwo": { "label": "Intro Body Two", "type": "text", "value": "Every NexGen program has clear outcomes, measurable milestones, and real expectations. Participants leave with actual work in their portfolios, actual relationships in their corner, and a clearer picture of what they're capable of." }
+      }
+    },
+    "team": {
+      "label": "Team",
+      "regions": {
+        "heroEyebrow": { "label": "Hero Eyebrow", "type": "text", "value": "The People" },
+        "heroTitle": { "label": "Hero Title", "type": "html", "value": "Driven by People<br>Who Believe in People" },
+        "heroIntro": { "label": "Hero Intro", "type": "text", "value": "Our team brings together expertise in education, community development, communications, and social finance — all united by a genuine belief that what we're building matters." }
+      }
+    },
+    "get-involved": {
+      "label": "Get Involved",
+      "regions": {
+        "heroEyebrow": { "label": "Hero Eyebrow", "type": "text", "value": "Join Us" },
+        "heroTitle": { "label": "Hero Title", "type": "html", "value": "Find Your Place<br>in the Work" },
+        "heroIntro": { "label": "Hero Intro", "type": "text", "value": "How to engage is simple: apply as a student, register as a mentor, volunteer your skills, or partner with us to strengthen youth leadership in our communities." },
+        "pageIntro": { "label": "Page Intro", "type": "text", "value": "We run two application intakes each year. If applications are closed when you apply, your submission is held for the next review round and you will receive updates by email." },
+        "intakeCalloutTitle": { "label": "Intake Callout Title", "type": "text", "value": "2026 Intake Windows" },
+        "intakeCalloutBody": { "label": "Intake Callout Body", "type": "text", "value": "Intake 1: February to March. Intake 2: August to September. Early applications are encouraged." }
+      }
+    },
+    "contact": {
+      "label": "Contact",
+      "regions": {
+        "heroEyebrow": { "label": "Hero Eyebrow", "type": "text", "value": "Get in Touch" },
+        "heroTitle": { "label": "Hero Title", "type": "html", "value": "We'd Love to<br>Hear From You" },
+        "heroIntro": { "label": "Hero Intro", "type": "text", "value": "Questions about our programs, a partnership idea, a donation enquiry, or just something you want to say — our team reads every message and responds to all of them." },
+        "email": { "label": "Email", "type": "html", "value": "<a href=\"mailto:hello@nexgenleaders.org\">hello@nexgenleaders.org</a>" },
+        "phone": { "label": "Phone", "type": "html", "value": "+27 (0)11 012 3456<br><small>Mon–Fri, 8am–5pm SAST</small>" },
+        "office": { "label": "Office", "type": "html", "value": "4th Floor, 123 Jan Smuts Avenue<br>Rosebank, Johannesburg<br>2196" },
+        "social": { "label": "Social", "type": "html", "value": "<a href=\"#\">@NexGenLeaders</a> on Instagram, X (Twitter), LinkedIn &amp; Facebook" }
+      }
+    },
+    "donate": {
+      "label": "Donate",
+      "regions": {
+        "heroEyebrow": { "label": "Hero Eyebrow", "type": "text", "value": "Support Our Work" },
+        "heroTitle": { "label": "Hero Title", "type": "html", "value": "Invest in the<br>Next Generation" },
+        "heroIntro": { "label": "Hero Intro", "type": "text", "value": "Our online gateway and EFT options are being finalized. You can still view impact levels and register your interest to donate." },
+        "impactIntro": { "label": "Impact Intro", "type": "text", "value": "Our goal is to direct the majority of donations into mentorship, academic support, and youth leadership development for students in our focus schools." },
+        "updateTitle": { "label": "Update Title", "type": "text", "value": "Donation Access Update" },
+        "updateBody": { "label": "Update Body", "type": "text", "value": "Card and EFT donations are temporarily unavailable while banking setup is completed. Please leave your details and our team will contact you when giving is live." }
+      }
+    }
+  },
+  "customPages": []
+}

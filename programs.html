@@ -7,8 +7,9 @@
     <meta name="description" content="Explore NexGen Leaders programs: Leadership Academy, Mentorship Network, Youth Impact Grants, and Workshops & Summits.">
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;1,9..40,400&family=Permanent+Marker&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
+    <script src="js/content-loader.js" defer></script>
 </head>
-<body>
+<body data-page="programs">
 
 <nav class="nav" id="main-nav">
     <a class="nav-brand" href="main.html">
@@ -33,9 +34,9 @@
         <div class="breadcrumb">
             <a href="main.html">Home</a> &nbsp;/&nbsp; <span>Programs</span>
         </div>
-        <span class="eyebrow">Our Programs</span>
-        <h1>Four Pathways.<br>One Direction.</h1>
-        <p>Each program is built around what young leaders actually need at a specific stage — structured enough to deliver real outcomes, flexible enough to meet people where they are.</p>
+        <span class="eyebrow" data-region="heroEyebrow">Our Programs</span>
+        <h1 data-region="heroTitle" data-render="html">Four Pathways.<br>One Direction.</h1>
+        <p data-region="heroIntro">Each program is built around what young leaders actually need at a specific stage — structured enough to deliver real outcomes, flexible enough to meet people where they are.</p>
     </div>
 </div>
 
@@ -46,11 +47,11 @@
                 <span class="section-eyebrow">How We Work</span>
                 <h2 class="section-title">Development That <span class="accent">Goes Deeper</span></h2>
                 <div class="section-bar"></div>
-                <p class="programs-intro-text">
+                <p class="programs-intro-text" data-region="introBodyOne">
                     Too many leadership programs are built around inspiration — good speakers, a certificate,
                     a day that felt energising and changed nothing. We're not interested in that.
                 </p>
-                <p class="programs-intro-text-gap">
+                <p class="programs-intro-text-gap" data-region="introBodyTwo">
                     Every NexGen program has clear outcomes, measurable milestones, and real expectations.
                     Participants leave with actual work in their portfolios, actual relationships in their corner,
                     and a clearer picture of what they're capable of.

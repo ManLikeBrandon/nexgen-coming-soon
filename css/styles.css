@@ -898,6 +898,103 @@ p:last-child { margin-bottom: 0; }
 /* Donate page */
 .donate-intro-text        { font-size: 1.05rem; line-height: 1.8; color: #444; margin-bottom: 2rem; }
 
+.donate-trust-list {
+    display: grid;
+    gap: 0.6rem;
+    margin-bottom: 1.5rem;
+}
+
+.donate-trust-item {
+    font-family: var(--font-heading);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #36424f;
+    background: #f4f6f8;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    padding: 0.6rem 0.8rem;
+}
+
+.impact-item {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.impact-item:last-of-type {
+    border-bottom: 0;
+    margin-bottom: 1rem;
+}
+
+.impact-amount {
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    color: var(--black);
+}
+
+.impact-desc h4 {
+    margin-bottom: 0.3rem;
+    font-size: 0.9rem;
+}
+
+.impact-desc p {
+    margin: 0;
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: var(--mid-grey);
+}
+
+.freq-toggle {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.freq-btn {
+    font-family: var(--font-heading);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    background: #f5f6f7;
+    color: #2a3138;
+    padding: 0.65rem 0.5rem;
+    cursor: pointer;
+    transition: all 0.18s;
+}
+
+.freq-btn:hover,
+.freq-btn.active {
+    background: var(--yellow-soft);
+    border-color: rgba(0, 0, 0, 0.32);
+}
+
+.check-group {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.92rem;
+    color: var(--mid-grey);
+}
+
+.check-group input {
+    width: 16px;
+    height: 16px;
+}
+
+.form-group > span {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--black);
+}
+
 /* Contact page */
 .contact-other-intro      { font-size: 1.05rem; color: #5a5a5a; line-height: 1.75; margin-bottom: 1.5rem; }
 .contact-callout-link     { color: var(--dark-text); border-bottom: 1px solid var(--yellow); }
@@ -1184,4 +1281,5 @@ details[open] .faq-icon { transform: rotate(45deg); }
     .donation-grid { grid-template-columns: repeat(2, 1fr); }
     .team-grid { grid-template-columns: 1fr; }
     .form-wrap { padding: 1.75rem 1.25rem; }
+    .impact-item { grid-template-columns: 1fr; gap: 0.35rem; }
 }

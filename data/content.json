@@ -71,7 +71,7 @@
         "email": { "label": "Email", "type": "html", "value": "<a href=\"mailto:info@nexgenleaders.org\">info@nexgenleaders.org</a>" },
         "phone": { "label": "Phone", "type": "html", "value": "Amber - 081 039 0081" },
         "office": { "label": "Office", "type": "html", "value": "28 Offord Manor, Ottery East" },
-        "social": { "label": "Social", "type": "html", "value": "<a href=\"https://www.instagram.com/the.ngl.foundation?igsh=cmswZmNsZ281Z3Uw\" target=\"_blank\" rel=\"noreferrer\">Instagram</a> | <a href=\"https://www.facebook.com/share/1Lpi7abQYx/\" target=\"_blank\" rel=\"noreferrer\">Facebook</a> | <a href=\"https://www.tiktok.com/@the.ngl.foundation?_r=1&_t=ZS-95tkLBU3CTg\" target=\"_blank\" rel=\"noreferrer\">TikTok</a>" }
+        "social": { "label": "Social", "type": "html", "value": "<a href=\"https://www.instagram.com/the.ngl.foundation\" target=\"_blank\" rel=\"noreferrer\">Instagram</a> | <a href=\"https://www.facebook.com/share/19XnNS23FC/?mibextid=wwXlfr\" target=\"_blank\" rel=\"noreferrer\">Facebook</a> | <a href=\"https://www.tiktok.com/@the.ngl.foundation\" target=\"_blank\" rel=\"noreferrer\">@the.ngl.foundation</a>" }
       }
     },
     "donate": {

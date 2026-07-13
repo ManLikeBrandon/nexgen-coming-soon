@@ -35,7 +35,7 @@
         </div>
         <span class="eyebrow" data-region="heroEyebrow">Support Our Work</span>
         <h1 data-region="heroTitle" data-render="html">Invest in the<br>Next Generation</h1>
-        <p data-region="heroIntro">Our online gateway and EFT options are being finalized. You can still view impact levels and register your interest to donate.</p>
+        <p data-region="heroIntro">Make a secure donation through PayFast and help fund youth mentorship, education support, and leadership development.</p>
     </div>
 </div>
 
@@ -84,17 +84,17 @@
                 </div>
 
                 <div class="callout">
-                    <div class="callout-accent" data-region="updateTitle">Donation Access Update</div>
-                    <p data-region="updateBody">Card and EFT donations are temporarily unavailable while banking setup is completed. Please leave your details and our team will contact you when giving is live.</p>
+                    <div class="callout-accent" data-region="updateTitle">Secure Payment Notice</div>
+                    <p data-region="updateBody">All online donations are processed through PayFast's secure hosted checkout. You will be redirected to PayFast to complete payment.</p>
                 </div>
             </div>
 
             <div>
                 <div class="form-wrap">
-                    <h3>Register Donation Interest</h3>
-                    <p class="form-note">We will notify you as soon as online payments and EFT are active.</p>
+                    <h3>Secure Donation Checkout</h3>
+                    <p class="form-note">Payments are processed on PayFast's secure checkout page.</p>
 
-                    <form action="#" method="post" novalidate>
+                    <form id="payfast-donation-form" novalidate>
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="d-first">First Name</label>
@@ -109,6 +109,11 @@
                         <div class="form-group">
                             <label for="d-email">Email Address</label>
                             <input type="email" id="d-email" name="email" placeholder="you@example.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="d-amount">Donation Amount (ZAR)</label>
+                            <input type="number" id="d-amount" name="amount" placeholder="500" min="10" step="0.01" required>
                         </div>
 
                         <div class="form-group">
@@ -127,7 +132,8 @@
                             <textarea id="d-message" name="message" placeholder="Tell us how you'd like to support the foundation."></textarea>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Notify Me When Donations Open</button>
+                        <button type="submit" class="btn btn-primary">Continue to Secure Payment</button>
+                        <p class="form-status" id="donation-status" aria-live="polite"></p>
                     </form>
                 </div>
             </div>
@@ -225,5 +231,7 @@
         a.addEventListener('click', () => links.classList.remove('open'));
     });
 </script>
+<script src="js/payfast-config.js"></script>
+<script src="js/payfast-checkout.js" defer></script>
 </body>
 </html>

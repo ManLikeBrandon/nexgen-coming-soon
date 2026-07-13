@@ -78,3 +78,49 @@ Published pages are available at:
 ```text
 /pages/your-slug
 ```
+
+## PayFast Payments (Secure)
+
+The donation checkout is now connected to a secure server-side flow:
+
+- Frontend: `donate.html` + `js/payfast-checkout.js`
+- Init endpoint: `supabase/functions/payfast-init/index.ts`
+- ITN endpoint: `supabase/functions/payfast-itn/index.ts`
+- Storage table: `public.donations` (added in `supabase/schema.sql`)
+
+### Why this is secure
+
+- PayFast merchant credentials are only used in backend environment variables.
+- The browser never receives the passphrase or service role key.
+- Payment status is finalized from PayFast ITN verification, not browser redirects.
+
+### Required environment variables
+
+Configure these in your Supabase Edge Functions environment:
+
+- `SUPABASE_URL`
+- `SUPABASE_SERVICE_ROLE_KEY`
+- `PAYFAST_MERCHANT_ID`
+- `PAYFAST_MERCHANT_KEY`
+- `PAYFAST_PASSPHRASE`
+- `PAYFAST_MODE` (`sandbox` or `live`)
+- `SITE_BASE_URL` (e.g. `https://nexgenleaders.org`)
+- `PAYFAST_ITN_URL` (optional override; defaults to `${SITE_BASE_URL}/functions/v1/payfast-itn`)
+
+### Frontend endpoint config
+
+Set `js/payfast-config.js`:
+
+```js
+window.NEXGEN_PAYFAST = {
+	initEndpoint: "https://<project-ref>.functions.supabase.co/payfast-init"
+};
+```
+
+### Deploy checklist
+
+1. Run updated SQL in `supabase/schema.sql`.
+2. Deploy `payfast-init` and `payfast-itn` functions.
+3. Configure all environment variables above.
+4. Set `js/payfast-config.js` with your deployed init endpoint.
+5. Test sandbox flow end-to-end before switching to `PAYFAST_MODE=live`.

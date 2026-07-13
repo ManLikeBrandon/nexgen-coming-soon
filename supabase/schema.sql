@@ -36,9 +36,27 @@ create table if not exists public.applications (
     created_at timestamptz not null default now()
 );
 
+create table if not exists public.donations (
+    id uuid primary key default gen_random_uuid(),
+    payment_id text not null unique,
+    donor_first_name text not null,
+    donor_last_name text not null,
+    donor_email text not null,
+    amount numeric(10,2) not null check (amount > 0),
+    currency text not null default 'ZAR',
+    donation_intent text,
+    donor_message text,
+    payment_status text not null default 'initiated' check (payment_status in ('initiated', 'complete', 'failed', 'cancelled')),
+    gateway text not null default 'payfast',
+    gateway_payment_id text,
+    created_at timestamptz not null default now(),
+    updated_at timestamptz not null default now()
+);
+
 alter table public.page_content enable row level security;
 alter table public.custom_pages enable row level security;
 alter table public.applications enable row level security;
+alter table public.donations enable row level security;
 
 drop policy if exists "Public can read page content" on public.page_content;
 create policy "Public can read page content"
@@ -75,5 +93,11 @@ with check (true);
 drop policy if exists "Authenticated can review applications" on public.applications;
 create policy "Authenticated can review applications"
 on public.applications for select
+to authenticated
+using (true);
+
+drop policy if exists "Authenticated can review donations" on public.donations;
+create policy "Authenticated can review donations"
+on public.donations for select
 to authenticated
 using (true);

@@ -10,11 +10,11 @@
         "missionTitle": { "label": "Mission Title", "type": "html", "value": "Built for the <span class=\"accent\">People Who Come Next</span>" },
         "missionBodyOne": { "label": "Mission Body One", "type": "text", "value": "We bridge the gap between potential and opportunity by walking alongside students with relatable mentorship and practical guidance for academic and career growth." },
         "missionBodyTwo": { "label": "Mission Body Two", "type": "text", "value": "Our targeted school impact focuses on Steenberg, Sibelius, Crestway, Lavender Hill, Heathfield, and Pelican Park High School." },
-        "programsLead": { "label": "Programs Lead", "type": "text", "value": "Our four core programs are focused on mentorship, educational empowerment, leadership development, and community advocacy." },
+        "programsLead": { "label": "Programs Lead", "type": "text", "value": "We don't just advocate for change - we facilitate it through practical programs built for student growth." },
         "quoteHtml": { "label": "Quote", "type": "html", "value": "\"The world doesn't need more followers.<br>It needs <span class=\"hl\">leaders who know why they lead.</span>\"" },
-        "joinMovementBody": { "label": "Join Movement Body", "type": "text", "value": "Whether you want to join a program, mentor someone, or put money behind work that actually matters — we'll find the right fit." },
+        "joinMovementBody": { "label": "Join Movement Body", "type": "text", "value": "Whether you want to join as a student, mentor, volunteer, or partner, there is a meaningful way to contribute to the work we are building." },
         "donateCtaTitle": { "label": "Donate CTA Title", "type": "html", "value": "Every Rand You Give<br>Builds a Leader" },
-        "donateCtaBody": { "label": "Donate CTA Body", "type": "text", "value": "Scholarships, mentorship, and grants for young people doing real work. That's where your money goes." }
+        "donateCtaBody": { "label": "Donate CTA Body", "type": "text", "value": "Donations support mentorship sessions, student support activities, and the growth of our youth leadership programs." }
       }
     },
     "about": {

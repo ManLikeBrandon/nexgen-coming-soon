@@ -125,7 +125,7 @@
             <div>
                 <div class="form-wrap">
                     <h3>Program Application</h3>
-                    <form action="mailto:info@nexgenleaders.org" method="post" enctype="text/plain" novalidate>
+                    <form id="program-application-form" data-submission-type="program" novalidate>
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="first-name">First Name</label>
@@ -177,6 +177,7 @@
                             </select>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit Application</button>
+                        <p class="form-status" data-form-status aria-live="polite"></p>
                         <p class="form-note">We read every application. You'll receive confirmation and next steps by email.</p>
                     </form>
                 </div>
@@ -208,7 +209,7 @@
             <div>
                 <div class="form-wrap">
                     <h3>Mentor Registration</h3>
-                    <form action="mailto:info@nexgenleaders.org" method="post" enctype="text/plain" novalidate>
+                    <form id="mentor-application-form" data-submission-type="mentor" novalidate>
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="m-first">First Name</label>
@@ -238,9 +239,10 @@
                         </div>
                         <div class="form-group">
                             <label for="m-why">What motivates you to mentor?</label>
-                            <textarea id="m-why" name="motivation" placeholder="Tell us why you want to give back, and what kind of participant you'd work best with. Honest answers help us make better matches."></textarea>
+                            <textarea id="m-why" name="motivation" placeholder="Tell us why you want to give back, and what kind of participant you'd work best with. Honest answers help us make better matches." required></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Register as Mentor</button>
+                        <p class="form-status" data-form-status aria-live="polite"></p>
                         <p class="form-note">After submitting, our team will contact you via email with the next steps and mentor onboarding timeline.</p>
                     </form>
                 </div>
@@ -313,5 +315,6 @@
         a.addEventListener('click', () => links.classList.remove('open'));
     });
 </script>
+<script src="js/application-submissions.js" defer></script>
 </body>
 </html>

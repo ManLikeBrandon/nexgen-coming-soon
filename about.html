@@ -11,17 +11,17 @@
 <body>
 
 <nav class="nav" id="main-nav">
-    <a class="nav-brand" href="main.html">
+    <a class="nav-brand" href="index">
         <img src="Nexgen (1).png" alt="NexGen Leaders Foundation">
     </a>
     <ul class="nav-links" id="nav-links">
-        <li><a href="main.html">Home</a></li>
-        <li><a href="about.html" class="active">About</a></li>
-        <li><a href="programs.html">Programs</a></li>
-        <li><a href="team.html">Our Team</a></li>
-        <li><a href="get-involved.html">Get Involved</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="donate.html" class="nav-cta">Donate</a></li>
+        <li><a href="index">Home</a></li>
+        <li><a href="about" class="active">About</a></li>
+        <li><a href="programs">Programs</a></li>
+        <li><a href="team">Our Team</a></li>
+        <li><a href="get-involved">Get Involved</a></li>
+        <li><a href="contact">Contact</a></li>
+        <li><a href="donate" class="nav-cta">Donate</a></li>
     </ul>
     <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle navigation">
         <span></span><span></span><span></span>
@@ -31,7 +31,7 @@
 <div class="page-hero">
     <div class="page-hero-inner">
         <div class="breadcrumb">
-            <a href="main.html">Home</a> &nbsp;/&nbsp; <span>About Us</span>
+            <a href="index">Home</a> &nbsp;/&nbsp; <span>About Us</span>
         </div>
         <span class="eyebrow">Who We Are</span>
         <h1>Our Story, Mission<br>&amp; Vision</h1>
@@ -49,7 +49,7 @@
                 <p class="prose">NexGen Leaders Foundation began with a simple but powerful realization: there is an abundance of talent in local schools, but a shortage of guidance needed to unlock it.</p>
                 <p class="prose">In early 2026, the foundation was established by Amber Dreyer and Michai Mentor. They saw recurring gaps in the Southern Suburbs, where ambitious students had potential but not always a clear roadmap into higher education and professional opportunities.</p>
                 <p class="prose prose-mb2">What started as a shared vision for getting the underprivileged educated evolved into a structured movement that pairs mentorship, leadership development, and community support for students who need it most.</p>
-                <a href="programs.html" class="btn btn-black">See Our Programs</a>
+                <a href="programs" class="btn btn-black">See Our Programs</a>
             </div>
             <div>
                 <div class="callout">
@@ -172,8 +172,8 @@
     <h2>Meet the People<br><span>Behind the Work</span></h2>
     <p>Our board, leadership team, and advisors bring deep experience across education, business, and community development to guide every program responsibly.</p>
     <div class="cta-actions">
-        <a href="team.html" class="btn btn-black btn-lg">Meet Our Team</a>
-        <a href="get-involved.html" class="btn btn-lg btn-ghost-black">Get Involved</a>
+        <a href="team" class="btn btn-black btn-lg">Meet Our Team</a>
+        <a href="get-involved" class="btn btn-lg btn-ghost-black">Get Involved</a>
     </div>
 </div>
 
@@ -188,28 +188,28 @@
             <div class="footer-col">
                 <h4>Organisation</h4>
                 <ul>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="team.html">Our Team</a></li>
-                    <li><a href="programs.html">Programs</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="about">About Us</a></li>
+                    <li><a href="team">Our Team</a></li>
+                    <li><a href="programs">Programs</a></li>
+                    <li><a href="contact">Contact</a></li>
                 </ul>
             </div>
             <div class="footer-col">
                 <h4>Get Involved</h4>
                 <ul>
-                    <li><a href="get-involved.html">Apply to a Program</a></li>
-                    <li><a href="get-involved.html">Become a Mentor</a></li>
-                    <li><a href="get-involved.html">Volunteer</a></li>
-                    <li><a href="get-involved.html">Partner With Us</a></li>
+                    <li><a href="get-involved">Apply to a Program</a></li>
+                    <li><a href="get-involved">Become a Mentor</a></li>
+                    <li><a href="get-involved">Volunteer</a></li>
+                    <li><a href="get-involved">Partner With Us</a></li>
                 </ul>
             </div>
             <div class="footer-col">
                 <h4>Support</h4>
                 <ul>
-                    <li><a href="donate.html">Donate</a></li>
-                    <li><a href="donate.html">Corporate Giving</a></li>
-                    <li><a href="donate.html">Sponsorship</a></li>
-                    <li><a href="contact.html">Press &amp; Media</a></li>
+                    <li><a href="donate">Donate</a></li>
+                    <li><a href="donate">Corporate Giving</a></li>
+                    <li><a href="donate">Sponsorship</a></li>
+                    <li><a href="contact">Press &amp; Media</a></li>
                 </ul>
             </div>
         </div>
@@ -218,13 +218,18 @@
             <div class="footer-bottom-links">
                 <a href="#">Privacy Policy</a>
                 <a href="#">Terms of Use</a>
-                <a href="contact.html">Contact Us</a>
+                <a href="contact">Contact Us</a>
             </div>
         </div>
     </div>
 </footer>
 
 <script>
+    if (window.location.pathname.endsWith('.html')) {
+        const cleanPath = window.location.pathname.replace(/\.html$/, '');
+        window.history.replaceState({}, '', `${cleanPath}${window.location.search}${window.location.hash}`);
+    }
+
     const toggle = document.getElementById('nav-toggle');
     const links = document.getElementById('nav-links');
     toggle.addEventListener('click', () => links.classList.toggle('open'));

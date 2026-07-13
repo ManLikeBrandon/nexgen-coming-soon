@@ -13,17 +13,17 @@
 <body data-page="get-involved">
 
 <nav class="nav" id="main-nav">
-    <a class="nav-brand" href="main.html">
+    <a class="nav-brand" href="index">
         <img src="Nexgen (1).png" alt="NexGen Leaders Foundation">
     </a>
     <ul class="nav-links" id="nav-links">
-        <li><a href="main.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="programs.html">Programs</a></li>
-        <li><a href="team.html">Our Team</a></li>
-        <li><a href="get-involved.html" class="active">Get Involved</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="donate.html" class="nav-cta">Donate</a></li>
+        <li><a href="index">Home</a></li>
+        <li><a href="about">About</a></li>
+        <li><a href="programs">Programs</a></li>
+        <li><a href="team">Our Team</a></li>
+        <li><a href="get-involved" class="active">Get Involved</a></li>
+        <li><a href="contact">Contact</a></li>
+        <li><a href="donate" class="nav-cta">Donate</a></li>
     </ul>
     <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle navigation">
         <span></span><span></span><span></span>
@@ -33,7 +33,7 @@
 <div class="page-hero">
     <div class="page-hero-inner">
         <div class="breadcrumb">
-            <a href="main.html">Home</a> &nbsp;/&nbsp; <span>Get Involved</span>
+            <a href="index">Home</a> &nbsp;/&nbsp; <span>Get Involved</span>
         </div>
         <span class="eyebrow" data-region="heroEyebrow">Join Us</span>
         <h1 data-region="heroTitle" data-render="html">Find Your Place<br>in the Work</h1>
@@ -73,7 +73,7 @@
                 <span class="card-icon">🤲</span>
                 <h3>Partner or Sponsor</h3>
                 <p>Partner with us to strengthen youth development through sponsorships, school partnerships, and opportunities that improve student outcomes.</p>
-                <a href="contact.html" class="btn btn-primary">Partner With Us</a>
+                <a href="contact" class="btn btn-primary">Partner With Us</a>
             </div>
         </div>
     </div>
@@ -255,8 +255,8 @@
     <h2>Not Ready to Join?<br><span>Donate Instead.</span></h2>
     <p>Your contribution funds scholarships and grants for young people who can't participate without support. Every rand stays in programs.</p>
     <div class="cta-actions">
-        <a href="donate.html" class="btn btn-black btn-lg">Make a Donation</a>
-        <a href="contact.html" class="btn btn-lg btn-ghost-black">Get in Touch</a>
+        <a href="donate" class="btn btn-black btn-lg">Make a Donation</a>
+        <a href="contact" class="btn btn-lg btn-ghost-black">Get in Touch</a>
     </div>
 </div>
 
@@ -271,28 +271,28 @@
             <div class="footer-col">
                 <h4>Organisation</h4>
                 <ul>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="team.html">Our Team</a></li>
-                    <li><a href="programs.html">Programs</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="about">About Us</a></li>
+                    <li><a href="team">Our Team</a></li>
+                    <li><a href="programs">Programs</a></li>
+                    <li><a href="contact">Contact</a></li>
                 </ul>
             </div>
             <div class="footer-col">
                 <h4>Get Involved</h4>
                 <ul>
-                    <li><a href="get-involved.html">Apply to a Program</a></li>
-                    <li><a href="get-involved.html">Become a Mentor</a></li>
-                    <li><a href="get-involved.html">Volunteer</a></li>
-                    <li><a href="get-involved.html">Partner With Us</a></li>
+                    <li><a href="get-involved">Apply to a Program</a></li>
+                    <li><a href="get-involved">Become a Mentor</a></li>
+                    <li><a href="get-involved">Volunteer</a></li>
+                    <li><a href="get-involved">Partner With Us</a></li>
                 </ul>
             </div>
             <div class="footer-col">
                 <h4>Support</h4>
                 <ul>
-                    <li><a href="donate.html">Donate</a></li>
-                    <li><a href="donate.html">Corporate Giving</a></li>
-                    <li><a href="donate.html">Sponsorship</a></li>
-                    <li><a href="contact.html">Press &amp; Media</a></li>
+                    <li><a href="donate">Donate</a></li>
+                    <li><a href="donate">Corporate Giving</a></li>
+                    <li><a href="donate">Sponsorship</a></li>
+                    <li><a href="contact">Press &amp; Media</a></li>
                 </ul>
             </div>
         </div>
@@ -308,6 +308,11 @@
 </footer>
 
 <script>
+    if (window.location.pathname.endsWith('.html')) {
+        const cleanPath = window.location.pathname.replace(/\.html$/, '');
+        window.history.replaceState({}, '', `${cleanPath}${window.location.search}${window.location.hash}`);
+    }
+
     const toggle = document.getElementById('nav-toggle');
     const links  = document.getElementById('nav-links');
     toggle.addEventListener('click', () => links.classList.toggle('open'));

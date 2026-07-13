@@ -67,10 +67,10 @@
       "regions": {
         "heroEyebrow": { "label": "Hero Eyebrow", "type": "text", "value": "Get in Touch" },
         "heroTitle": { "label": "Hero Title", "type": "html", "value": "We'd Love to<br>Hear From You" },
-        "heroIntro": { "label": "Hero Intro", "type": "text", "value": "For all enquiries, email us directly. We currently do not have a registered phone line or office address." },
+        "heroIntro": { "label": "Hero Intro", "type": "text", "value": "For all enquiries, contact us by email or phone." },
         "email": { "label": "Email", "type": "html", "value": "<a href=\"mailto:info@nexgenleaders.org\">info@nexgenleaders.org</a>" },
-        "phone": { "label": "Phone", "type": "html", "value": "No registered phone number yet." },
-        "office": { "label": "Office", "type": "html", "value": "No registered office yet." },
+        "phone": { "label": "Phone", "type": "html", "value": "Amber - 081 039 0081" },
+        "office": { "label": "Office", "type": "html", "value": "28 Offord Manor, Ottery East" },
         "social": { "label": "Social", "type": "html", "value": "<a href=\"https://www.instagram.com/the.ngl.foundation?igsh=cmswZmNsZ281Z3Uw\" target=\"_blank\" rel=\"noreferrer\">Instagram</a> | <a href=\"https://www.facebook.com/share/1Lpi7abQYx/\" target=\"_blank\" rel=\"noreferrer\">Facebook</a> | <a href=\"https://www.tiktok.com/@the.ngl.foundation?_r=1&_t=ZS-95tkLBU3CTg\" target=\"_blank\" rel=\"noreferrer\">TikTok</a>" }
       }
     },

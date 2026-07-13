@@ -1,4 +1,6 @@
 window.NEXGEN_PAYFAST = {
-    // Public endpoint for starting checkout (server-side signs payload).
-    initEndpoint: "https://YOUR_PROJECT_REF.functions.supabase.co/payfast-init"
+    // Public endpoint that starts checkout. The server signs the payment there,
+    // so no PayFast credentials are ever exposed to the browser.
+    // Find <project-ref> in Supabase: Project Settings -> General -> Reference ID.
+    initEndpoint: "https://<project-ref>.supabase.co/functions/v1/payfast-init"
 };

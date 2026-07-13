@@ -7,33 +7,41 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const config = window.NEXGEN_PAYFAST || {};
+    const supportEmail = "info@nexgenleaders.org";
 
     function setStatus(message, tone) {
         status.textContent = message || "";
         status.classList.remove("is-success", "is-error", "is-loading");
 
-        if (tone === "success") {
-            status.classList.add("is-success");
-        } else if (tone === "error") {
-            status.classList.add("is-error");
-        } else if (tone === "loading") {
-            status.classList.add("is-loading");
+        if (tone) {
+            status.classList.add(`is-${tone}`);
         }
     }
 
+    function showReturnMessage() {
+        const result = new URLSearchParams(window.location.search).get("status");
+
+        if (result === "success") {
+            setStatus(
+                "Thank you. Your payment was submitted successfully and a receipt will be emailed to you by PayFast.",
+                "success"
+            );
+        } else if (result === "cancelled") {
+            setStatus("Your payment was cancelled. You can start again whenever you are ready.", "error");
+        }
+    }
+
+    // The signature PayFast verifies depends on the order the fields arrive in,
+    // so the server sends an ordered list and we post it exactly as given.
     function submitToPayFast(gatewayUrl, fields) {
         const payfastForm = document.createElement("form");
         payfastForm.method = "POST";
         payfastForm.action = gatewayUrl;
 
-        Object.entries(fields).forEach(([key, value]) => {
-            if (value === undefined || value === null || value === "") {
-                return;
-            }
-
+        fields.forEach(({ name, value }) => {
             const input = document.createElement("input");
             input.type = "hidden";
-            input.name = key;
+            input.name = name;
             input.value = String(value);
             payfastForm.appendChild(input);
         });
@@ -41,6 +49,8 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.appendChild(payfastForm);
         payfastForm.submit();
     }
+
+    showReturnMessage();
 
     form.addEventListener("submit", async (event) => {
         event.preventDefault();
@@ -51,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         if (!config.initEndpoint) {
-            setStatus("Payment setup incomplete. Please contact info@nexgenleaders.org.", "error");
+            setStatus(`Payment setup is incomplete. Please contact ${supportEmail}.`, "error");
             return;
         }
 
@@ -74,22 +84,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const response = await fetch(config.initEndpoint, {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload)
             });
 
-            const data = await response.json();
+            const data = await response.json().catch(() => null);
 
-            if (!response.ok || !data?.gatewayUrl || !data?.fields) {
+            if (!response.ok || !data?.gatewayUrl || !Array.isArray(data.fields)) {
                 throw new Error(data?.error || "Unable to start payment. Please try again.");
             }
 
             setStatus("Redirecting to PayFast...", "success");
             submitToPayFast(data.gatewayUrl, data.fields);
         } catch (error) {
-            setStatus(error.message || "Unable to start payment. Please contact info@nexgenleaders.org.", "error");
+            setStatus(error.message || `Unable to start payment. Please contact ${supportEmail}.`, "error");
             if (submitButton) {
                 submitButton.disabled = false;
             }

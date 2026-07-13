@@ -1,0 +1,10 @@
+project_id = "nexgen-coming-soon"
+
+# The donation form is called from the public website with no logged-in user,
+# and PayFast's servers cannot send a Supabase JWT. Both functions must be
+# reachable without one - they are protected by signature verification instead.
+[functions.payfast-init]
+verify_jwt = false
+
+[functions.payfast-itn]
+verify_jwt = false

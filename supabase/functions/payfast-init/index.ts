@@ -1,38 +1,42 @@
-import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
-import { createClient } from "npm:@supabase/supabase-js@2";
-import md5 from "npm:blueimp-md5";
+import { createClient } from "npm:@supabase/supabase-js@2.45.4";
+import {
+    buildOrderedFields,
+    corsHeaders,
+    isValidEmail,
+    johannesburgToday,
+    jsonResponse,
+    processUrl,
+    sanitizeText,
+    signPairs
+} from "../_shared/payfast.ts";
 
-const corsHeaders = {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type"
+const DONATION_INTENTS: Record<string, string> = {
+    once: "One-time Donation",
+    monthly: "Monthly Donation",
+    corporate: "Corporate Giving",
+    sponsorship: "Sponsorship"
 };
 
-function buildSignature(fields: Record<string, string>, passphrase: string): string {
-    const keys = Object.keys(fields)
-        .filter((key) => key !== "signature" && fields[key] !== "")
-        .sort();
+const PAYFAST_MONTHLY_FREQUENCY = "3";
+const PAYFAST_INDEFINITE_CYCLES = "0";
 
-    const payload = keys
-        .map((key) => `${key}=${encodeURIComponent(fields[key]).replace(/%20/g, "+")}`)
-        .join("&");
+Deno.serve(async (req) => {
+    const allowedOrigins = (Deno.env.get("ALLOWED_ORIGINS") || "")
+        .split(",")
+        .map((origin) => origin.trim())
+        .filter(Boolean);
+    const headers = corsHeaders(req, allowedOrigins);
 
-    const withPassphrase = passphrase
-        ? `${payload}&passphrase=${encodeURIComponent(passphrase).replace(/%20/g, "+")}`
-        : payload;
-
-    return md5(withPassphrase);
-}
-
-serve(async (req) => {
     if (req.method === "OPTIONS") {
-        return new Response("ok", { headers: corsHeaders });
+        return new Response(null, { status: 204, headers });
     }
 
     if (req.method !== "POST") {
-        return new Response(JSON.stringify({ error: "Method not allowed" }), {
-            status: 405,
-            headers: { ...corsHeaders, "Content-Type": "application/json" }
-        });
+        return jsonResponse({ error: "Method not allowed" }, 405, headers);
+    }
+
+    if (!headers["Access-Control-Allow-Origin"]) {
+        return jsonResponse({ error: "Origin not allowed" }, 403, headers);
     }
 
     try {
@@ -42,32 +46,52 @@ serve(async (req) => {
         const merchantKey = Deno.env.get("PAYFAST_MERCHANT_KEY") || "";
         const passphrase = Deno.env.get("PAYFAST_PASSPHRASE") || "";
         const mode = (Deno.env.get("PAYFAST_MODE") || "sandbox").toLowerCase();
-        const siteBaseUrl = Deno.env.get("SITE_BASE_URL") || "";
-        const itnUrl = Deno.env.get("PAYFAST_ITN_URL") || `${siteBaseUrl}/functions/v1/payfast-itn`;
+        const siteBaseUrl = (Deno.env.get("SITE_BASE_URL") || "").replace(/\/+$/, "");
+        const notifyUrl = Deno.env.get("PAYFAST_NOTIFY_URL")
+            || `${supabaseUrl}/functions/v1/payfast-itn`;
+
+        const minAmount = Number(Deno.env.get("PAYFAST_MIN_AMOUNT") || "5");
+        const maxAmount = Number(Deno.env.get("PAYFAST_MAX_AMOUNT") || "100000");
 
         if (!supabaseUrl || !serviceRoleKey || !merchantId || !merchantKey || !siteBaseUrl) {
-            return new Response(JSON.stringify({ error: "Gateway not configured" }), {
-                status: 500,
-                headers: { ...corsHeaders, "Content-Type": "application/json" }
-            });
+            console.error("payfast-init: missing required environment variables");
+            return jsonResponse({ error: "Payment gateway is not configured." }, 500, headers);
         }
 
-        const body = await req.json();
-        const firstName = String(body.firstName || "").trim();
-        const lastName = String(body.lastName || "").trim();
-        const email = String(body.email || "").trim().toLowerCase();
-        const donationIntent = String(body.donationIntent || "once").trim();
-        const donorMessage = String(body.message || "").trim();
-        const amountNumber = Number(body.amount);
+        const body = await req.json().catch(() => null);
+        if (!body || typeof body !== "object") {
+            return jsonResponse({ error: "Invalid request." }, 400, headers);
+        }
 
-        if (!firstName || !lastName || !email || !Number.isFinite(amountNumber) || amountNumber <= 0) {
-            return new Response(JSON.stringify({ error: "Invalid donation details" }), {
-                status: 400,
-                headers: { ...corsHeaders, "Content-Type": "application/json" }
-            });
+        const firstName = sanitizeText(body.firstName, 100);
+        const lastName = sanitizeText(body.lastName, 100);
+        const email = sanitizeText(body.email, 100).toLowerCase();
+        const donorMessage = sanitizeText(body.message, 1000);
+        const intent = sanitizeText(body.donationIntent, 40).toLowerCase();
+        const amountNumber = Math.round(Number(body.amount) * 100) / 100;
+
+        if (!firstName || !lastName) {
+            return jsonResponse({ error: "Please provide your first and last name." }, 400, headers);
+        }
+
+        if (!isValidEmail(email)) {
+            return jsonResponse({ error: "Please provide a valid email address." }, 400, headers);
+        }
+
+        if (!DONATION_INTENTS[intent]) {
+            return jsonResponse({ error: "Please select a valid donation type." }, 400, headers);
+        }
+
+        if (!Number.isFinite(amountNumber) || amountNumber < minAmount || amountNumber > maxAmount) {
+            return jsonResponse(
+                { error: `Donation amount must be between R${minAmount} and R${maxAmount}.` },
+                400,
+                headers
+            );
         }
 
         const amount = amountNumber.toFixed(2);
+        const isRecurring = intent === "monthly";
         const paymentId = crypto.randomUUID();
 
         const supabase = createClient(supabaseUrl, serviceRoleKey, {
@@ -80,48 +104,55 @@ serve(async (req) => {
             donor_last_name: lastName,
             donor_email: email,
             amount: amountNumber,
-            donation_intent: donationIntent,
+            donation_intent: intent,
             donor_message: donorMessage,
             payment_status: "initiated",
-            gateway: "payfast"
+            gateway: "payfast",
+            subscription_type: isRecurring ? 1 : 0
         });
 
         if (insertError) {
-            return new Response(JSON.stringify({ error: "Unable to initialize donation" }), {
-                status: 500,
-                headers: { ...corsHeaders, "Content-Type": "application/json" }
-            });
+            console.error("payfast-init: donation insert failed", insertError.message);
+            return jsonResponse({ error: "Unable to start your donation." }, 500, headers);
         }
 
-        const fields: Record<string, string> = {
+        const values: Record<string, string> = {
             merchant_id: merchantId,
             merchant_key: merchantKey,
             return_url: `${siteBaseUrl}/donate?status=success`,
             cancel_url: `${siteBaseUrl}/donate?status=cancelled`,
-            notify_url: itnUrl,
+            notify_url: notifyUrl,
             name_first: firstName,
             name_last: lastName,
             email_address: email,
             m_payment_id: paymentId,
             amount,
-            item_name: "NexGen Leaders Donation",
-            item_description: donationIntent
+            item_name: sanitizeText("NexGen Leaders Foundation Donation", 100),
+            item_description: sanitizeText(DONATION_INTENTS[intent], 255)
         };
 
-        fields.signature = buildSignature(fields, passphrase);
+        if (isRecurring) {
+            values.subscription_type = "1";
+            values.billing_date = johannesburgToday();
+            values.recurring_amount = amount;
+            values.frequency = PAYFAST_MONTHLY_FREQUENCY;
+            values.cycles = PAYFAST_INDEFINITE_CYCLES;
+        }
 
-        const gatewayUrl = mode === "live"
-            ? "https://www.payfast.co.za/eng/process"
-            : "https://sandbox.payfast.co.za/eng/process";
+        const fields = buildOrderedFields(values);
+        const signature = signPairs(fields, passphrase);
 
-        return new Response(JSON.stringify({ gatewayUrl, fields }), {
-            status: 200,
-            headers: { ...corsHeaders, "Content-Type": "application/json" }
-        });
-    } catch (_error) {
-        return new Response(JSON.stringify({ error: "Unable to start payment" }), {
-            status: 500,
-            headers: { ...corsHeaders, "Content-Type": "application/json" }
-        });
+        return jsonResponse(
+            {
+                gatewayUrl: processUrl(mode),
+                paymentId,
+                fields: [...fields, ["signature", signature]].map(([name, value]) => ({ name, value }))
+            },
+            200,
+            headers
+        );
+    } catch (error) {
+        console.error("payfast-init: unexpected error", error);
+        return jsonResponse({ error: "Unable to start payment." }, 500, headers);
     }
 });

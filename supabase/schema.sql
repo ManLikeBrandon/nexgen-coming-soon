@@ -46,17 +46,45 @@ create table if not exists public.donations (
     currency text not null default 'ZAR',
     donation_intent text,
     donor_message text,
-    payment_status text not null default 'initiated' check (payment_status in ('initiated', 'complete', 'failed', 'cancelled')),
+    payment_status text not null default 'initiated',
     gateway text not null default 'payfast',
     gateway_payment_id text,
     created_at timestamptz not null default now(),
     updated_at timestamptz not null default now()
 );
 
+-- 0 = once-off payment, 1 = PayFast recurring subscription.
+alter table public.donations add column if not exists subscription_type smallint not null default 0;
+
+-- PayFast subscription token, needed to pause or cancel a monthly donation.
+alter table public.donations add column if not exists payfast_token text;
+
+alter table public.donations drop constraint if exists donations_payment_status_check;
+alter table public.donations add constraint donations_payment_status_check
+    check (payment_status in ('initiated', 'pending', 'complete', 'failed', 'cancelled'));
+
+-- One row per actual charge confirmed by PayFast. A monthly donation produces a
+-- new row every month while pointing at the same donations record.
+create table if not exists public.donation_payments (
+    id uuid primary key default gen_random_uuid(),
+    donation_id uuid not null references public.donations(id) on delete cascade,
+    pf_payment_id text not null unique,
+    payment_status text not null,
+    amount_gross numeric(10,2),
+    amount_fee numeric(10,2),
+    amount_net numeric(10,2),
+    raw_payload jsonb not null default '{}'::jsonb,
+    created_at timestamptz not null default now()
+);
+
+create index if not exists donation_payments_donation_id_idx on public.donation_payments (donation_id);
+create index if not exists donations_created_at_idx on public.donations (created_at desc);
+
 alter table public.page_content enable row level security;
 alter table public.custom_pages enable row level security;
 alter table public.applications enable row level security;
 alter table public.donations enable row level security;
+alter table public.donation_payments enable row level security;
 
 drop policy if exists "Public can read page content" on public.page_content;
 create policy "Public can read page content"
@@ -96,8 +124,17 @@ on public.applications for select
 to authenticated
 using (true);
 
+-- No anon or authenticated write policies exist for donations or donation_payments.
+-- Only the edge functions write to them, using the service role key, which
+-- bypasses RLS. The public can never insert or alter a donation record.
 drop policy if exists "Authenticated can review donations" on public.donations;
 create policy "Authenticated can review donations"
 on public.donations for select
+to authenticated
+using (true);
+
+drop policy if exists "Authenticated can review donation payments" on public.donation_payments;
+create policy "Authenticated can review donation payments"
+on public.donation_payments for select
 to authenticated
 using (true);

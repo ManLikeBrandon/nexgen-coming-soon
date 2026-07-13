@@ -79,48 +79,214 @@ Published pages are available at:
 /pages/your-slug
 ```
 
-## PayFast Payments (Secure)
+## PayFast Payments
 
-The donation checkout is now connected to a secure server-side flow:
+### How the payment flow works
 
-- Frontend: `donate.html` + `js/payfast-checkout.js`
-- Init endpoint: `supabase/functions/payfast-init/index.ts`
-- ITN endpoint: `supabase/functions/payfast-itn/index.ts`
-- Storage table: `public.donations` (added in `supabase/schema.sql`)
+Money never touches this website. The donor's card details are only ever entered on
+PayFast's own checkout page. Here is the full journey:
+
+1. The donor fills in the form on `donate.html`.
+2. The browser sends the donation details to the **`payfast-init`** function.
+3. `payfast-init` saves the donation in the database with the status `initiated`,
+   then signs the payment using your PayFast credentials and sends the signed
+   fields back to the browser.
+4. The browser auto-submits those fields to PayFast, and the donor is redirected
+   to PayFast's secure checkout page to pay.
+5. After paying, the donor is sent back to `/donate?status=success`.
+6. **Separately and invisibly**, PayFast's servers call the **`payfast-itn`**
+   function to confirm the payment. This is called the ITN (Instant Transaction
+   Notification), and it is the *only* thing that marks a donation as `complete`.
+
+Step 6 is the important one. The redirect in step 5 comes from the donor's own
+browser and can be faked, so it is only used to show a friendly thank-you message.
+The database is only updated from the ITN, which is verified five different ways.
+
+### The pieces
+
+| File | What it does |
+| --- | --- |
+| `donate.html` | The donation form |
+| `js/payfast-checkout.js` | Sends the form to the server, redirects to PayFast |
+| `js/payfast-config.js` | Holds the public URL of your `payfast-init` function |
+| `supabase/functions/_shared/payfast.ts` | Signing and verification logic shared by both functions |
+| `supabase/functions/payfast-init/index.ts` | Starts a payment (signs it) |
+| `supabase/functions/payfast-itn/index.ts` | Receives and verifies PayFast's confirmation |
+| `supabase/config.toml` | Makes both functions publicly reachable |
+| `supabase/schema.sql` | The `donations` and `donation_payments` tables |
 
 ### Why this is secure
 
-- PayFast merchant credentials are only used in backend environment variables.
-- The browser never receives the passphrase or service role key.
-- Payment status is finalized from PayFast ITN verification, not browser redirects.
+- Your PayFast merchant key and passphrase live only in server environment
+  variables. They are never sent to the browser.
+- The donation amount is stored server-side before the donor leaves the site, and
+  the ITN is rejected if the amount PayFast reports does not match it. A donor
+  cannot edit the price in their browser.
+- Every incoming ITN must pass five checks: a valid signature (proves the sender
+  knows your passphrase), a matching merchant ID, a source IP belonging to
+  PayFast, a confirmation callback to PayFast asking "did you really send this?",
+  and an amount match.
+- Nobody can write to the `donations` table from the browser. Row Level Security
+  allows only reads by logged-in admins; the functions write using the service
+  role key.
 
-### Required environment variables
+---
 
-Configure these in your Supabase Edge Functions environment:
+## Setting it up (step by step)
 
-- `SUPABASE_URL`
-- `SUPABASE_SERVICE_ROLE_KEY`
-- `PAYFAST_MERCHANT_ID`
-- `PAYFAST_MERCHANT_KEY`
-- `PAYFAST_PASSPHRASE`
-- `PAYFAST_MODE` (`sandbox` or `live`)
-- `SITE_BASE_URL` (e.g. `https://nexgenleaders.org`)
-- `PAYFAST_ITN_URL` (optional override; defaults to `${SITE_BASE_URL}/functions/v1/payfast-itn`)
+### Step 1 — Create the database tables
 
-### Frontend endpoint config
+In Supabase, open **SQL Editor**, paste the entire contents of
+`supabase/schema.sql`, and run it. It is safe to run more than once.
 
-Set `js/payfast-config.js`:
+### Step 2 — Get your PayFast credentials
+
+Log in to PayFast, then go to **Settings → Integration**. You need three values:
+
+- **Merchant ID**
+- **Merchant Key**
+- **Passphrase** — if this box is empty, set one now and save. It is what makes
+  the signature verification meaningful, so do not leave it blank.
+
+For testing, use PayFast's sandbox (<https://sandbox.payfast.co.za>) instead. The
+standard sandbox test credentials are Merchant ID `10000100` and Merchant Key
+`46f0cd694581a`. Set the sandbox passphrase in the sandbox dashboard and use that
+same value in Step 4.
+
+### Step 3 — Install the Supabase CLI and link the project
+
+```bash
+npm install -g supabase
+supabase login
+supabase link --project-ref <project-ref>
+```
+
+Your `<project-ref>` is in Supabase under **Project Settings → General →
+Reference ID**. It looks like `abcdefghijklmnop`.
+
+### Step 4 — Set the secrets
+
+Run this once, filling in your own values. These are stored securely by Supabase
+and are only visible to your functions:
+
+```bash
+supabase secrets set \
+  PAYFAST_MERCHANT_ID=10000100 \
+  PAYFAST_MERCHANT_KEY=46f0cd694581a \
+  PAYFAST_PASSPHRASE=your-passphrase-here \
+  PAYFAST_MODE=sandbox \
+  SITE_BASE_URL=https://nexgenleaders.org \
+  ALLOWED_ORIGINS=https://nexgenleaders.org
+```
+
+You do **not** need to set `SUPABASE_URL` or `SUPABASE_SERVICE_ROLE_KEY` —
+Supabase provides those to your functions automatically.
+
+| Secret | Required | What it is |
+| --- | --- | --- |
+| `PAYFAST_MERCHANT_ID` | Yes | From PayFast → Settings → Integration |
+| `PAYFAST_MERCHANT_KEY` | Yes | From PayFast → Settings → Integration |
+| `PAYFAST_PASSPHRASE` | Yes | From PayFast → Settings → Integration |
+| `PAYFAST_MODE` | Yes | `sandbox` while testing, `live` when taking real money |
+| `SITE_BASE_URL` | Yes | Your site, no trailing slash. Used for the return links |
+| `ALLOWED_ORIGINS` | Recommended | Comma-separated sites allowed to call the function. If left unset, any site can call it |
+| `PAYFAST_MIN_AMOUNT` | No | Smallest donation allowed. Defaults to `5` (PayFast's own minimum) |
+| `PAYFAST_MAX_AMOUNT` | No | Largest donation allowed. Defaults to `100000` |
+| `PAYFAST_NOTIFY_URL` | No | Override for the ITN URL. Only needed if you host the ITN elsewhere |
+
+### Step 5 — Deploy the two functions
+
+```bash
+supabase functions deploy payfast-init
+supabase functions deploy payfast-itn
+```
+
+`supabase/config.toml` already sets `verify_jwt = false` for both. This matters:
+Supabase functions normally demand a login token, and PayFast's servers cannot
+send one. Without this setting every payment confirmation would be rejected before
+your code even ran.
+
+> If you deploy from the Supabase dashboard instead of the CLI, you must turn off
+> "Verify JWT" for both functions manually in the function's settings.
+
+### Step 6 — Point the website at your function
+
+Edit `js/payfast-config.js` and replace `<project-ref>` with your real project
+reference:
 
 ```js
 window.NEXGEN_PAYFAST = {
-	initEndpoint: "https://<project-ref>.functions.supabase.co/payfast-init"
+    initEndpoint: "https://abcdefghijklmnop.supabase.co/functions/v1/payfast-init"
 };
 ```
 
-### Deploy checklist
+Commit and push this file. It is meant to be public — it contains no secrets.
 
-1. Run updated SQL in `supabase/schema.sql`.
-2. Deploy `payfast-init` and `payfast-itn` functions.
-3. Configure all environment variables above.
-4. Set `js/payfast-config.js` with your deployed init endpoint.
-5. Test sandbox flow end-to-end before switching to `PAYFAST_MODE=live`.
+### Step 7 — Test in the sandbox
+
+With `PAYFAST_MODE=sandbox`, open the donate page and make a test donation. Use
+PayFast's sandbox test card details, which are shown on the sandbox checkout page.
+
+Then confirm it worked:
+
+```sql
+select payment_id, donor_email, amount, payment_status, created_at
+from donations
+order by created_at desc
+limit 5;
+```
+
+The status should read `complete`. If it still says `initiated`, PayFast could not
+reach your ITN endpoint — check the `payfast-itn` logs in the Supabase dashboard
+under **Edge Functions → payfast-itn → Logs**.
+
+### Step 8 — Go live
+
+1. Swap in your real PayFast credentials and set `PAYFAST_MODE=live`:
+   ```bash
+   supabase secrets set PAYFAST_MERCHANT_ID=... PAYFAST_MERCHANT_KEY=... \
+     PAYFAST_PASSPHRASE=... PAYFAST_MODE=live
+   ```
+2. Redeploy both functions so they pick up the new values.
+3. Make one small real donation (R5) to yourself and confirm it lands in the
+   database as `complete` and appears in your PayFast dashboard.
+
+---
+
+### Monthly (recurring) donations
+
+If a donor picks "Monthly Donation", PayFast sets up a recurring subscription that
+charges the same amount every month until it is cancelled.
+
+- Each monthly charge sends a new ITN, and each one is stored as its own row in
+  `donation_payments`, all linked back to the single original `donations` row.
+- The subscription token is saved to `donations.payfast_token`. You need it to
+  cancel or pause the subscription later.
+- **Recurring billing must be enabled on your PayFast account** — check under
+  **Settings → Recurring Billing**. If it is not enabled, monthly donations will
+  fail while one-time donations keep working.
+
+### Checking on donations
+
+- `donations` — one row per donation attempt (who, how much, current status).
+- `donation_payments` — one row per charge PayFast actually confirmed, including
+  PayFast's fee and the net amount you received, plus the raw notification for
+  your records.
+
+```sql
+select d.donor_email, d.amount, d.donation_intent,
+       p.amount_net, p.payment_status, p.created_at
+from donation_payments p
+join donations d on d.id = p.donation_id
+order by p.created_at desc;
+```
+
+### Troubleshooting
+
+| What you see | What it usually means |
+| --- | --- |
+| PayFast shows "signature mismatch" | The `PAYFAST_PASSPHRASE` secret does not exactly match the one in your PayFast dashboard. Re-set it and redeploy |
+| Donation stays on `initiated` forever | PayFast cannot reach your ITN endpoint. Check the `payfast-itn` logs; the usual cause is "Verify JWT" still being on |
+| Browser console shows a CORS error | `ALLOWED_ORIGINS` does not include the exact site you are browsing from, including `https://` |
+| "Payment gateway is not configured" | A required secret is missing. Run `supabase secrets list` to see which |
+| Monthly donations fail, one-time ones work | Recurring Billing is not enabled on your PayFast account |

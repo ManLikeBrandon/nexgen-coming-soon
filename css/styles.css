@@ -859,6 +859,19 @@ button[disabled] {
 .prose-mb2 { margin-bottom: 2rem; }
 .prose-mb3 { margin-bottom: 3rem; }
 
+.school-list {
+    list-style: disc;
+    margin: 0 0 2rem 1.25rem;
+    padding: 0;
+}
+
+.school-list li {
+    font-size: 1.02rem;
+    line-height: 1.75;
+    color: #444;
+    margin-bottom: 0.2rem;
+}
+
 /* Centred section header block */
 .section-center-wrap {
     max-width: 680px;

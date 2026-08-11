@@ -75,9 +75,8 @@ p:last-child { margin-bottom: 0; }
     flex-shrink: 0;
 }
 .nav-brand img {
-    height: 42px;
+    height: 40px;
     width: auto;
-    filter: brightness(0) invert(1);
 }
 .nav-brand-name {
     font-family: var(--font-heading);
@@ -801,9 +800,8 @@ button[disabled] {
     margin-bottom: 3rem;
 }
 .footer-brand-logo {
-    height: 52px;
+    height: 54px;
     width: auto;
-    filter: brightness(0) invert(1);
     margin-bottom: 1rem;
 }
 .footer-brand p {

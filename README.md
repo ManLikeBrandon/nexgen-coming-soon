@@ -1,5 +1,37 @@
 # nexgen-coming-soon
 
+## Brand (colours & fonts)
+
+**Colours** are defined once as CSS variables in `css/styles.css` (`:root`) and
+reused everywhere via `var(--…)`:
+
+- Yellow: `#f9de2b` (`--yellow`)
+- Black: `#1a1715` (`--black`, a warm near-black)
+
+`admin/admin.css` and `coming-soon.html` carry their own copies of these values.
+
+**Fonts:** the site is designed for **Acumin Pro** — **Bold (700)** for headings,
+**Light (300)** for body copy. Acumin Pro is an Adobe Fonts (Typekit) typeface and
+is **not free**, so it must be loaded from your own Adobe Fonts account. Until you
+add it, the site automatically falls back to **Source Sans 3** (a close, free
+cousin of Acumin), which is already loaded from Google Fonts — so the site looks
+right immediately.
+
+### Enabling Acumin Pro
+
+1. Sign in at <https://fonts.adobe.com> (included with Adobe Creative Cloud).
+2. Create a **Web Project**, add **Acumin Pro** with the **Light (300)** and
+   **Bold (700)** weights, and note the two-line embed code Adobe gives you.
+3. In every HTML file, find the comment that reads
+   `<!-- Brand type: Acumin Pro (Adobe Fonts). Paste your Adobe Fonts kit <link> below… -->`
+   and paste your kit's `<link rel="stylesheet" href="https://use.typekit.net/XXimport.css">`
+   line directly beneath it.
+4. That's it — the CSS already lists `acumin-pro` first in the font stack, so it
+   takes over from the Source Sans 3 fallback the moment the kit loads.
+
+The font is referenced as `acumin-pro` in `--font-heading` / `--font-body`; don't
+rename it, as that is the family name Adobe serves.
+
 ## Phase 1 CMS
 
 This project now uses a static-site-friendly CMS approach:

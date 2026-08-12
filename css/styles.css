@@ -4,13 +4,13 @@
     ============================================================ */
 
 :root {
-    --yellow:     #d8ad2f;
-    --yellow-soft:#f8efd1;
-    --black:      #000000;
+    --yellow:     #f9de2b;
+    --yellow-soft:#fdf5c0;
+    --black:      #1a1715;
     --bg-grey:    #eef1f4;
     --white:      #ffffff;
     --off-white:  #f8f7f4;
-    --dark-text:  #1f2329;
+    --dark-text:  #1a1715;
     --mid-grey:   #5e6670;
     --light-grey: #dce2e8;
 
@@ -18,8 +18,9 @@
     --shadow-sm: 0 6px 14px rgba(0, 0, 0, 0.1);
     --shadow-lg: 0 16px 30px rgba(0, 0, 0, 0.16);
 
-    --font-heading: 'Archivo Black', sans-serif;
-    --font-body:    'DM Sans', sans-serif;
+    /* Acumin Pro (Adobe Fonts) is primary; Source Sans 3 is the free fallback. */
+    --font-heading: 'acumin-pro', 'Source Sans 3', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --font-body:    'acumin-pro', 'Source Sans 3', system-ui, -apple-system, 'Segoe UI', sans-serif;
     --font-accent:  'Permanent Marker', cursive;
 }
 
@@ -30,6 +31,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: var(--font-body);
+    font-weight: 300;
     font-size: 16px;
     line-height: 1.7;
     color: var(--dark-text);
@@ -42,6 +44,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 /* ---- TYPOGRAPHY ---- */
 h1, h2, h3, h4, h5 {
     font-family: var(--font-heading);
+    font-weight: 700;
     line-height: 1.1;
     margin: 0 0 1rem;
 }
@@ -60,7 +63,7 @@ p:last-child { margin-bottom: 0; }
     top: 0; left: 0; right: 0;
     z-index: 1000;
     background: var(--black);
-    border-bottom: 2px solid rgba(216, 173, 47, 0.75);
+    border-bottom: 2px solid rgba(249, 222, 43, 0.75);
     height: 70px;
     display: flex;
     align-items: center;
@@ -80,6 +83,7 @@ p:last-child { margin-bottom: 0; }
 }
 .nav-brand-name {
     font-family: var(--font-heading);
+    font-weight: 700;
     font-size: 1rem;
     color: var(--white);
     text-transform: uppercase;
@@ -98,6 +102,7 @@ p:last-child { margin-bottom: 0; }
 }
 .nav-links a {
     font-family: var(--font-heading);
+    font-weight: 700;
     font-size: 0.78rem;
     color: rgba(255,255,255,0.8);
     text-transform: uppercase;
@@ -209,6 +214,7 @@ p:last-child { margin-bottom: 0; }
 }
 .page-hero .eyebrow {
     font-family: var(--font-heading);
+    font-weight: 700;
     font-size: 0.72rem;
     text-transform: uppercase;
     letter-spacing: 3px;
@@ -230,6 +236,7 @@ p:last-child { margin-bottom: 0; }
 .btn {
     display: inline-block;
     font-family: var(--font-heading);
+    font-weight: 700;
     font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -284,6 +291,7 @@ p:last-child { margin-bottom: 0; }
 
 .section-eyebrow {
     font-family: var(--font-heading);
+    font-weight: 700;
     font-size: 0.72rem;
     text-transform: uppercase;
     letter-spacing: 3px;
@@ -354,6 +362,7 @@ p:last-child { margin-bottom: 0; }
 .stat-item:last-child { border-right: none; }
 .stat-number {
     font-family: var(--font-heading);
+    font-weight: 700;
     font-size: clamp(2.2rem, 5vw, 3.8rem);
     color: var(--black);
     line-height: 1;
@@ -361,6 +370,7 @@ p:last-child { margin-bottom: 0; }
 }
 .stat-label {
     font-family: var(--font-heading);
+    font-weight: 700;
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 1.5px;
@@ -396,6 +406,7 @@ p:last-child { margin-bottom: 0; }
 }
 .card-tag {
     font-family: var(--font-heading);
+    font-weight: 700;
     font-size: 0.68rem;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -411,6 +422,7 @@ p:last-child { margin-bottom: 0; }
 .card .card-link {
     display: inline-block;
     font-family: var(--font-heading);
+    font-weight: 700;
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -456,6 +468,7 @@ p:last-child { margin-bottom: 0; }
 }
 .program-card-header .prog-tag {
     font-family: var(--font-heading);
+    font-weight: 700;
     font-size: 0.65rem;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -484,6 +497,7 @@ p:last-child { margin-bottom: 0; }
 }
 .program-detail {
     font-family: var(--font-heading);
+    font-weight: 700;
     font-size: 0.72rem;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -523,6 +537,7 @@ p:last-child { margin-bottom: 0; }
     align-items: center;
     justify-content: center;
     font-family: var(--font-heading);
+    font-weight: 700;
     font-size: 3rem;
     color: var(--black);
     border-bottom: 2px solid var(--black);
@@ -540,6 +555,7 @@ p:last-child { margin-bottom: 0; }
 .team-info h3 { font-size: 1rem; margin-bottom: 0.2rem; }
 .team-role {
     font-family: var(--font-heading);
+    font-weight: 700;
     font-size: 0.7rem;
     text-transform: uppercase;
     letter-spacing: 1.5px;
@@ -562,6 +578,7 @@ p:last-child { margin-bottom: 0; }
 .form-group label {
     display: block;
     font-family: var(--font-heading);
+    font-weight: 700;
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -585,7 +602,7 @@ p:last-child { margin-bottom: 0; }
 .form-group input:focus,
 .form-group textarea:focus,
 .form-group select:focus {
-    box-shadow: 0 0 0 3px rgba(216, 173, 47, 0.28);
+    box-shadow: 0 0 0 3px rgba(249, 222, 43, 0.28);
 }
 .form-group textarea { min-height: 130px; resize: vertical; }
 .form-row {
@@ -626,6 +643,7 @@ button[disabled] {
 }
 .amt-btn {
     font-family: var(--font-heading);
+    font-weight: 700;
     font-size: 1.1rem;
     padding: 14px;
     border: 1px solid rgba(0, 0, 0, 0.2);
@@ -711,6 +729,7 @@ button[disabled] {
     left: 50%;
     transform: translateX(-50%);
     font-family: var(--font-heading);
+    font-weight: 700;
     font-size: 20rem;
     color: rgba(255,210,0,0.07);
     line-height: 1;
@@ -724,6 +743,7 @@ button[disabled] {
 }
 .pull-quote blockquote p {
     font-family: var(--font-heading);
+    font-weight: 700;
     font-size: clamp(1.3rem, 3vw, 2rem);
     text-transform: uppercase;
     color: var(--white);
@@ -743,8 +763,8 @@ button[disabled] {
    ============================================================ */
 .cta-section {
     background: linear-gradient(180deg, #131313 0%, #202020 100%);
-    border-top: 2px solid rgba(216, 173, 47, 0.72);
-    border-bottom: 2px solid rgba(216, 173, 47, 0.72);
+    border-top: 2px solid rgba(249, 222, 43, 0.72);
+    border-bottom: 2px solid rgba(249, 222, 43, 0.72);
     padding: 5rem 2rem;
     text-align: center;
 }
@@ -790,7 +810,7 @@ button[disabled] {
     background: var(--black);
     color: var(--white);
     padding: 5rem 2rem 2rem;
-    border-top: 2px solid rgba(216, 173, 47, 0.75);
+    border-top: 2px solid rgba(249, 222, 43, 0.75);
 }
 .footer-inner { max-width: 1100px; margin: 0 auto; }
 .footer-grid {
@@ -817,6 +837,7 @@ button[disabled] {
 }
 .footer-col h4 {
     font-family: var(--font-heading);
+    font-weight: 700;
     font-size: 0.72rem;
     text-transform: uppercase;
     letter-spacing: 2.5px;
@@ -936,6 +957,7 @@ button[disabled] {
 
 .donate-trust-item {
     font-family: var(--font-heading);
+    font-weight: 700;
     font-size: 0.78rem;
     text-transform: uppercase;
     letter-spacing: 1.2px;
@@ -960,6 +982,7 @@ button[disabled] {
 
 .impact-amount {
     font-family: var(--font-heading);
+    font-weight: 700;
     font-size: 1.05rem;
     color: var(--black);
 }
@@ -985,6 +1008,7 @@ button[disabled] {
 
 .freq-btn {
     font-family: var(--font-heading);
+    font-weight: 700;
     font-size: 0.72rem;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -1019,6 +1043,7 @@ button[disabled] {
 .form-group > span {
     display: block;
     font-family: var(--font-heading);
+    font-weight: 700;
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -1054,6 +1079,7 @@ button[disabled] {
 }
 .dark-panel-eyebrow {
     font-family: var(--font-heading);
+    font-weight: 700;
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -1066,6 +1092,7 @@ button[disabled] {
 .timeline-item { display: flex; gap: 1rem; align-items: flex-start; }
 .timeline-year {
     font-family: var(--font-heading);
+    font-weight: 700;
     color: var(--yellow);
     font-size: 1.1rem;
     min-width: 50px;
@@ -1093,6 +1120,7 @@ button[disabled] {
 }
 .box-eyebrow {
     font-family: var(--font-heading);
+    font-weight: 700;
     font-size: 0.72rem;
     text-transform: uppercase;
     letter-spacing: 3px;
@@ -1136,12 +1164,14 @@ button[disabled] {
     align-items: center;
     justify-content: center;
     font-family: var(--font-heading);
+    font-weight: 700;
     font-size: 1.1rem;
     flex-shrink: 0;
 }
 .board-info h4 { font-size: 0.95rem; margin-bottom: 0.15rem; }
 .board-role {
     font-family: var(--font-heading);
+    font-weight: 700;
     font-size: 0.65rem;
     text-transform: uppercase;
     letter-spacing: 1.5px;
@@ -1175,6 +1205,7 @@ button[disabled] {
 }
 .mentor-quote-cite {
     font-family: var(--font-heading);
+    font-weight: 700;
     font-size: 0.72rem;
     text-transform: uppercase;
     letter-spacing: 1.5px;
@@ -1191,6 +1222,7 @@ button[disabled] {
 }
 .faq-summary {
     font-family: var(--font-heading);
+    font-weight: 700;
     font-size: 0.95rem;
     padding: 1.25rem 1.5rem;
     cursor: pointer;
@@ -1249,6 +1281,7 @@ details[open] .faq-icon { transform: rotate(45deg); }
 /* Breadcrumb bar at top of page hero */
 .breadcrumb {
     font-family: var(--font-heading);
+    font-weight: 700;
     font-size: 0.72rem;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -1281,7 +1314,7 @@ details[open] .faq-icon { transform: rotate(45deg); }
         background: var(--black);
         padding: 1.5rem 2rem 2rem;
         gap: 1rem;
-        border-bottom: 2px solid rgba(216, 173, 47, 0.75);
+        border-bottom: 2px solid rgba(249, 222, 43, 0.75);
     }
     .nav-links.open a { font-size: 0.9rem; }
 
@@ -1399,7 +1432,7 @@ details[open] .faq-icon { transform: rotate(45deg); }
 .legal-body li { margin-bottom: 0.5rem; }
 .legal-body a {
     color: #8a6d16;
-    border-bottom: 1px solid rgba(216, 173, 47, 0.5);
+    border-bottom: 1px solid rgba(249, 222, 43, 0.5);
 }
 .legal-body a:hover { border-bottom-color: var(--yellow); }
 .legal-body .callout p:last-child { margin-bottom: 0; }
@@ -1427,6 +1460,7 @@ details[open] .faq-icon { transform: rotate(45deg); }
 }
 .legal-table th {
     font-family: var(--font-heading);
+    font-weight: 700;
     font-size: 0.72rem;
     letter-spacing: 1.5px;
     text-transform: uppercase;

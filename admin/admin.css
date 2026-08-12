@@ -1,19 +1,20 @@
 :root {
     --admin-bg: #0f1115;
     --admin-panel: #ffffff;
-    --admin-accent: #d8ad2f;
+    --admin-accent: #f9de2b;
     --admin-text: #1e242b;
     --admin-muted: #66707a;
     --admin-border: #dbe1e7;
     --admin-shadow: 0 16px 32px rgba(0, 0, 0, 0.12);
-    --font-heading: 'Archivo Black', sans-serif;
-    --font-body: 'DM Sans', sans-serif;
+    --font-heading: 'acumin-pro', 'Source Sans 3', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --font-body: 'acumin-pro', 'Source Sans 3', system-ui, -apple-system, 'Segoe UI', sans-serif;
 }
 
 * { box-sizing: border-box; }
 body {
     margin: 0;
     font-family: var(--font-body);
+    font-weight: 300;
     background: linear-gradient(180deg, #12151b 0%, #1e2530 100%);
     color: var(--admin-text);
 }
@@ -61,6 +62,7 @@ select {
 h1, h2 {
     margin: 0;
     font-family: var(--font-heading);
+    font-weight: 700;
     line-height: 1.1;
 }
 
@@ -180,6 +182,7 @@ button {
 .custom-page-item h3 {
     margin: 0 0 0.3rem;
     font-family: var(--font-heading);
+    font-weight: 700;
     font-size: 1rem;
 }
 

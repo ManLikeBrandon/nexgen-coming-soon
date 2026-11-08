@@ -51,6 +51,30 @@ No local Node server is required to run the site.
 4. Add your Supabase project URL and anon key.
 5. Open `admin/index.html` through your static host or local static preview.
 
+## Website Forms
+
+The Contact, Program Application and Mentor Registration forms are handled by
+Google Apps Script. Each submission is saved to a private Google Sheet and
+emailed to info@nexgenleaders.org. Donations stay on PayFast.
+
+1. Signed in to the organisation's Google account, create a new Google Sheet
+   named "NexGen Website Forms". Do not share it by link.
+2. In the Sheet, open **Extensions → Apps Script**.
+3. Replace the contents of `Code.gs` with `google-apps-script/Code.gs` and save.
+4. Click **Deploy → New deployment**, choose type **Web app**, set **Execute as**
+   to **Me** and **Who has access** to **Anyone**, then click **Deploy** and
+   approve the permissions.
+5. Copy the **Web app URL** (ends in `/exec`) into `endpoint` in
+   `js/forms-config.js`, then publish the site.
+6. Submit each form once and confirm the email arrives and a row appears.
+
+If `Code.gs` changes later, use **Deploy → Manage deployments → Edit → New
+version** so the URL stays the same.
+
+Each email counts toward Google's daily limit (100 on a normal Google account,
+1,500 on Workspace). Past the limit, submissions are still saved to the Sheet and
+marked in its **Email Status** column.
+
 ## Login
 
 Admin login is now managed by Supabase Auth.

@@ -100,7 +100,7 @@
                 <div class="form-wrap">
                     <h3>Send Us a Message</h3>
                     <p class="form-note">We aim to respond within 2 business days.</p>
-                    <form action="mailto:info@nexgenleaders.org" method="post" enctype="text/plain" novalidate>
+                    <form id="contact-form" data-submission-type="contact" novalidate>
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="c-first">First Name</label>
@@ -137,6 +137,7 @@
                             <textarea id="c-message" name="message" placeholder="Tell us what's on your mind..." required></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Send Message</button>
+                        <p class="form-status" data-form-status aria-live="polite"></p>
                     </form>
                 </div>
             </div>
@@ -268,5 +269,7 @@
         a.addEventListener('click', () => links.classList.remove('open'));
     });
 </script>
+<script src="js/forms-config.js" defer></script>
+<script src="js/application-submissions.js" defer></script>
 </body>
 </html>

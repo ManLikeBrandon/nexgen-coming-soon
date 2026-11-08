@@ -1,15 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const pageId = document.body.dataset.page;
-    if (pageId !== 'get-involved') {
-        return;
-    }
-
     const forms = Array.from(document.querySelectorAll('form[data-submission-type]'));
     if (!forms.length) {
         return;
     }
 
-    const config = window.NEXGEN_CMS || {};
+    const config = window.NEXGEN_FORMS || {};
+    const fallbackMessage = 'Submission failed. Please email info@nexgenleaders.org.';
+    const successMessages = {
+        program: 'Thank you. Your application was submitted successfully. Our team will contact you by email.',
+        mentor: 'Thank you. Your registration was submitted successfully. Our team will contact you by email.',
+        contact: 'Thank you. Your message has been sent. We aim to respond within 2 business days.'
+    };
 
     function setStatus(form, message, tone) {
         const status = form.querySelector('[data-form-status]');
@@ -32,58 +33,49 @@ document.addEventListener('DOMContentLoaded', () => {
     function setSubmitting(form, isSubmitting) {
         const button = form.querySelector('button[type="submit"]');
         if (button) {
+            button.dataset.label = button.dataset.label || button.textContent;
             button.disabled = isSubmitting;
-            button.textContent = isSubmitting
-                ? 'Submitting...'
-                : (form.dataset.submissionType === 'mentor' ? 'Register as Mentor' : 'Submit Application');
+            button.textContent = isSubmitting ? 'Submitting...' : button.dataset.label;
         }
     }
 
-    function loadSupabaseScript() {
-        if (window.supabase && window.supabase.createClient) {
-            return Promise.resolve();
+    // A field people never see; automated bots tend to fill it in.
+    function addSpamTrap(form) {
+        const trap = document.createElement('div');
+        trap.setAttribute('aria-hidden', 'true');
+        trap.style.cssText = 'position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;';
+        trap.innerHTML = '<input type="text" name="website" tabindex="-1" autocomplete="off">';
+        form.appendChild(trap);
+    }
+
+    async function submitForm(form) {
+        if (!config.endpoint) {
+            throw new Error('Our forms are being set up. Please email info@nexgenleaders.org.');
         }
 
-        return new Promise((resolve, reject) => {
-            const script = document.createElement('script');
-            script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
-            script.onload = resolve;
-            script.onerror = () => reject(new Error('Failed to load Supabase client.'));
-            document.head.appendChild(script);
+        const payload = Object.fromEntries(new FormData(form).entries());
+        payload.submission_type = form.dataset.submissionType;
+
+        // Sent as text/plain because Google Apps Script cannot answer the
+        // browser's preflight check that application/json would trigger.
+        const response = await fetch(config.endpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(payload)
         });
-    }
+        const result = await response.json().catch(() => null);
 
-    async function createClient() {
-        if (!config.supabaseUrl || !config.supabaseAnonKey) {
-            throw new Error('Submission service is not configured yet. Please email info@nexgenleaders.org.');
+        if (!result) {
+            throw new Error(fallbackMessage);
         }
-
-        await loadSupabaseScript();
-        return window.supabase.createClient(config.supabaseUrl, config.supabaseAnonKey);
-    }
-
-    function toPayload(form) {
-        const data = new FormData(form);
-        const raw = Object.fromEntries(data.entries());
-        const submissionType = form.dataset.submissionType;
-
-        return {
-            submission_type: submissionType,
-            first_name: (raw.first_name || '').trim(),
-            last_name: (raw.last_name || '').trim(),
-            email: (raw.email || '').trim().toLowerCase(),
-            age: raw.age ? Number(raw.age) : null,
-            city: (raw.city || '').trim() || null,
-            program: (raw.program || '').trim() || null,
-            profession: (raw.profession || '').trim() || null,
-            experience: (raw.experience || '').trim() || null,
-            motivation: (raw.motivation || '').trim(),
-            heard: (raw.heard || '').trim() || null,
-            source_page: 'get-involved'
-        };
+        if (!result.ok) {
+            throw new Error(result.message || fallbackMessage);
+        }
     }
 
     forms.forEach(form => {
+        addSpamTrap(form);
+
         form.addEventListener('submit', async event => {
             event.preventDefault();
 
@@ -96,28 +88,12 @@ document.addEventListener('DOMContentLoaded', () => {
             setStatus(form, 'Submitting your details...', 'loading');
 
             try {
-                const client = await createClient();
-                const payload = toPayload(form);
-                const { error } = await client
-                    .from('applications')
-                    .insert(payload);
-
-                if (error) {
-                    throw new Error(error.message || 'Unable to submit right now.');
-                }
-
+                await submitForm(form);
                 form.reset();
-                setStatus(
-                    form,
-                    'Thank you. Your application was submitted successfully. Our team will contact you by email.',
-                    'success'
-                );
+                setStatus(form, successMessages[form.dataset.submissionType], 'success');
             } catch (error) {
-                setStatus(
-                    form,
-                    error.message || 'Submission failed. Please email info@nexgenleaders.org.',
-                    'error'
-                );
+                const isNetworkError = error instanceof TypeError;
+                setStatus(form, isNetworkError ? fallbackMessage : error.message, 'error');
             } finally {
                 setSubmitting(form, false);
             }

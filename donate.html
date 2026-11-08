@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Donate | The NexGen Leaders Foundation</title>
-    <meta name="description" content="Support the NexGen Leaders Foundation. Donation gateway and EFT options are being finalized; register your interest to give.">
+    <meta name="description" content="Support the NexGen Leaders Foundation. Make a secure donation through PayFast and help fund youth mentorship, education support, and leadership development.">
     <!-- Brand type: Acumin Pro (Adobe Fonts). Paste your Adobe Fonts kit <link> below to enable it; -->
     <!-- until then the site uses Source Sans 3, a close free fallback. -->
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;600;700&family=Permanent+Marker&display=swap" rel="stylesheet">
@@ -100,47 +100,22 @@
             <div>
                 <div class="form-wrap">
                     <h3>Secure Donation Checkout</h3>
-                    <p class="form-note">Payments are processed on PayFast's secure checkout page. Choosing a monthly donation sets up a recurring payment that you can cancel at any time.</p>
+                    <p class="form-note">Enter the amount you would like to give. You will complete your details and payment on PayFast's secure checkout page.</p>
 
-                    <form id="payfast-donation-form" novalidate>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="d-first">First Name</label>
-                                <input type="text" id="d-first" name="first_name" placeholder="First name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="d-last">Last Name</label>
-                                <input type="text" id="d-last" name="last_name" placeholder="Last name" required>
-                            </div>
-                        </div>
+                    <form name="PayFastPayNowForm" action="https://payment.payfast.io/eng/process" method="post">
+                        <input type="hidden" name="cmd" value="_paynow">
+                        <input type="hidden" name="receiver" value="36043087">
+                        <input type="hidden" name="return_url" value="https://nexgenleaders.org/donate?status=success">
+                        <input type="hidden" name="cancel_url" value="https://nexgenleaders.org/donate?status=cancelled">
+                        <input type="hidden" name="item_name" maxlength="255" value="Donation to The NexGen Leaders Foundation">
+                        <input type="hidden" name="item_description" maxlength="255" value="Thank you for your donation. Your support helps fund mentorship, educational support and leadership development for young people in our communities.">
 
                         <div class="form-group">
-                            <label for="d-email">Email Address</label>
-                            <input type="email" id="d-email" name="email" placeholder="you@example.com" required>
+                            <label for="PayFastAmount">Donation Amount (ZAR)</label>
+                            <input type="number" id="PayFastAmount" name="amount" placeholder="250" value="250" min="5.00" step=".01" required>
                         </div>
 
-                        <div class="form-group">
-                            <label for="d-amount">Donation Amount (ZAR)</label>
-                            <input type="number" id="d-amount" name="amount" placeholder="500" min="10" step="0.01" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="d-intent">Intended Donation Type</label>
-                            <select id="d-intent" name="donation_intent" required>
-                                <option value="" disabled selected>Select an option</option>
-                                <option value="once">One-time Donation</option>
-                                <option value="monthly">Monthly Donation (recurring)</option>
-                                <option value="corporate">Corporate Giving</option>
-                                <option value="sponsorship">Sponsorship</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="d-message">Message (Optional)</label>
-                            <textarea id="d-message" name="message" placeholder="Tell us how you'd like to support the foundation."></textarea>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary">Continue to Secure Payment</button>
+                        <button type="submit" class="btn btn-primary">Donate Now</button>
                         <p class="form-status" id="donation-status" aria-live="polite"></p>
                     </form>
                 </div>
@@ -239,7 +214,19 @@
         a.addEventListener('click', () => links.classList.remove('open'));
     });
 </script>
-<script src="js/payfast-config.js"></script>
-<script src="js/payfast-checkout.js" defer></script>
+<script>
+    (function () {
+        const status = document.getElementById('donation-status');
+        const result = new URLSearchParams(window.location.search).get('status');
+
+        if (result === 'success') {
+            status.textContent = 'Thank you for your donation. PayFast will email your receipt.';
+            status.classList.add('is-success');
+        } else if (result === 'cancelled') {
+            status.textContent = 'Your payment was cancelled. You can start again whenever you are ready.';
+            status.classList.add('is-error');
+        }
+    })();
+</script>
 </body>
 </html>

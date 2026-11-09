@@ -168,6 +168,21 @@
                                 <input type="hidden" name="frequency" value="3">
                                 <button type="submit" class="btn btn-primary">R1 000 / month</button>
                             </form>
+
+                            <form name="PayFastMonthly5000" action="https://payment.payfast.io/eng/process" method="post">
+                                <input type="hidden" name="cmd" value="_paynow">
+                                <input type="hidden" name="receiver" value="36043087">
+                                <input type="hidden" name="return_url" value="https://nexgenleaders.org/donate?status=success">
+                                <input type="hidden" name="cancel_url" value="https://nexgenleaders.org/donate?status=cancelled">
+                                <input type="hidden" name="amount" value="5000">
+                                <input type="hidden" name="item_name" maxlength="255" value="Monthly Donation R5000 - The NexGen Leaders Foundation">
+                                <input type="hidden" name="item_description" maxlength="255" value="Thank you for your monthly donation of R5 000. Your support helps fund mentorship, educational support and leadership development for young people. You can cancel at any time.">
+                                <input type="hidden" name="subscription_type" value="1">
+                                <input type="hidden" name="recurring_amount" value="5000">
+                                <input type="hidden" name="cycles" value="0">
+                                <input type="hidden" name="frequency" value="3">
+                                <button type="submit" class="btn btn-primary">R5 000 / month</button>
+                            </form>
                         </div>
                     </div>
                 </div>

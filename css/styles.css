@@ -6,11 +6,11 @@
 :root {
     --yellow:     #f9de2b;
     --yellow-soft:#fdf5c0;
-    --black:      #1a1715;
+    --black:      #111111;
     --bg-grey:    #eef1f4;
     --white:      #ffffff;
     --off-white:  #f8f7f4;
-    --dark-text:  #1a1715;
+    --dark-text:  #111111;
     --mid-grey:   #5e6670;
     --light-grey: #dce2e8;
 
@@ -474,7 +474,8 @@ p:last-child { margin-bottom: 0; }
     letter-spacing: 2px;
     color: var(--yellow);
 }
-.program-card-body { padding: 2rem; flex: 1; }
+.program-card-body { padding: 2rem; flex: 1; display: flex; flex-direction: column; }
+.program-card-body > :has(+ .program-details) { margin-bottom: 1.5rem; }
 .program-card-body p { font-size: 0.95rem; color: var(--mid-grey); line-height: 1.7; }
 .program-bullet-list {
     list-style: disc;
@@ -488,12 +489,11 @@ p:last-child { margin-bottom: 0; }
     margin-bottom: 0.25rem;
 }
 .program-details {
-    display: flex;
-    gap: 1.5rem;
-    margin-top: 1.25rem;
-    padding-top: 1.25rem;
-    border-top: 1px solid var(--light-grey);
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: auto;
+    border-top: 1px solid rgba(0, 0, 0, 0.16);
+    border-left: 1px solid rgba(0, 0, 0, 0.16);
 }
 .program-detail {
     font-family: var(--font-heading);
@@ -502,12 +502,18 @@ p:last-child { margin-bottom: 0; }
     text-transform: uppercase;
     letter-spacing: 1px;
     color: var(--mid-grey);
+    padding: 0.8rem 1rem;
+    border-right: 1px solid rgba(0, 0, 0, 0.16);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.16);
 }
 .program-detail span {
     display: block;
     color: var(--black);
-    font-size: 0.9rem;
+    font-size: 0.82rem;
     margin-top: 0.15rem;
+}
+@media (max-width: 480px) {
+    .program-details { grid-template-columns: 1fr; }
 }
 
 /* ============================================================
@@ -905,6 +911,32 @@ button[disabled] {
    ============================================================ */
 .text-center  { text-align: center; }
 .text-yellow  { color: var(--yellow); }
+
+/* Shadows that lift yellow text off its background */
+.section-title .accent {
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.85), 2px 3px 5px rgba(0, 0, 0, 0.3);
+}
+.section-black .section-title .accent,
+.nav-brand-name em,
+.nav-links a.active:not(.nav-cta),
+.hero-eyebrow,
+.hero h1 .hl,
+.page-hero .eyebrow,
+.program-card-header .prog-tag,
+.pull-quote blockquote p .hl,
+.cta-section h2 span,
+.footer-slogan,
+.footer-col h4,
+.footer-col ul li a:hover,
+.footer-bottom a:hover,
+.dark-panel-eyebrow,
+.timeline-year,
+.quick-links-panel h4,
+.quick-links-list a:hover,
+.breadcrumb span,
+.breadcrumb a:hover {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9), 0 0 12px rgba(249, 222, 43, 0.4);
+}
 .mt-1 { margin-top: 1rem; }
 .mt-2 { margin-top: 2rem; }
 .mt-3 { margin-top: 3rem; }
@@ -964,7 +996,7 @@ button[disabled] {
 .programs-intro-text-gap  { font-size: 1.05rem; line-height: 1.8; color: #444; margin-bottom: 2rem; }
 .programs-cards-label     { margin-top: 3rem; }
 .program-card-actions     { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.5rem; }
-.program-card-cta         { margin-top: 1.5rem; }
+.program-card-cta         { margin-top: 1.5rem; align-self: flex-start; }
 .impact-goal-wrap         { max-width: 900px; }
 .impact-goal-text         { max-width: 900px; margin-bottom: 0; }
 
@@ -1418,7 +1450,7 @@ details[open] .faq-icon { transform: rotate(45deg); }
 }
 .legal-toc a::before {
     content: counter(legal-toc) ". ";
-    color: var(--yellow);
+    color: var(--black);
     font-weight: 500;
 }
 .legal-toc a:hover { color: var(--black); }

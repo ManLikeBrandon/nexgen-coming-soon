@@ -6,7 +6,7 @@
 reused everywhere via `var(--…)`:
 
 - Yellow: `#f9de2b` (`--yellow`)
-- Black: `#1a1715` (`--black`, a warm near-black)
+- Black: `#111111` (`--black`, a neutral near-black)
 
 `admin/admin.css` and `coming-soon.html` carry their own copies of these values.
 

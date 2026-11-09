@@ -586,6 +586,22 @@ p:last-child { margin-bottom: 0; }
     box-shadow: var(--shadow-lg);
     padding: 2.5rem;
 }
+.monthly-giving {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.16);
+}
+.monthly-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+}
+.monthly-options .btn {
+    width: 100%;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
 .form-group { margin-bottom: 1.5rem; }
 .form-group:last-child { margin-bottom: 0; }
 .form-group label {

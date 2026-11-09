@@ -118,6 +118,58 @@
                         <button type="submit" class="btn btn-primary">Donate Now</button>
                         <p class="form-status" id="donation-status" aria-live="polite"></p>
                     </form>
+
+                    <div class="monthly-giving">
+                        <h3>Give Monthly</h3>
+                        <p class="form-note">Choose a monthly amount and complete your details on PayFast's secure checkout page. You can cancel at any time by emailing <a href="mailto:info@nexgenleaders.org">info@nexgenleaders.org</a>.</p>
+
+                        <div class="monthly-options">
+                            <form name="PayFastMonthly250" action="https://payment.payfast.io/eng/process" method="post">
+                                <input type="hidden" name="cmd" value="_paynow">
+                                <input type="hidden" name="receiver" value="36043087">
+                                <input type="hidden" name="return_url" value="https://nexgenleaders.org/donate?status=success">
+                                <input type="hidden" name="cancel_url" value="https://nexgenleaders.org/donate?status=cancelled">
+                                <input type="hidden" name="amount" value="250">
+                                <input type="hidden" name="item_name" maxlength="255" value="Monthly Donation R250 - The NexGen Leaders Foundation">
+                                <input type="hidden" name="item_description" maxlength="255" value="Thank you for your monthly donation of R250. Your support helps fund mentorship, educational support and leadership development for young people. You can cancel at any time.">
+                                <input type="hidden" name="subscription_type" value="1">
+                                <input type="hidden" name="recurring_amount" value="250">
+                                <input type="hidden" name="cycles" value="0">
+                                <input type="hidden" name="frequency" value="3">
+                                <button type="submit" class="btn btn-primary">R250 / month</button>
+                            </form>
+
+                            <form name="PayFastMonthly500" action="https://payment.payfast.io/eng/process" method="post">
+                                <input type="hidden" name="cmd" value="_paynow">
+                                <input type="hidden" name="receiver" value="36043087">
+                                <input type="hidden" name="return_url" value="https://nexgenleaders.org/donate?status=success">
+                                <input type="hidden" name="cancel_url" value="https://nexgenleaders.org/donate?status=cancelled">
+                                <input type="hidden" name="amount" value="500">
+                                <input type="hidden" name="item_name" maxlength="255" value="Monthly Donation R500 - The NexGen Leaders Foundation">
+                                <input type="hidden" name="item_description" maxlength="255" value="Thank you for your monthly donation of R500. Your support helps fund mentorship, educational support and leadership development for young people. You can cancel at any time.">
+                                <input type="hidden" name="subscription_type" value="1">
+                                <input type="hidden" name="recurring_amount" value="500">
+                                <input type="hidden" name="cycles" value="0">
+                                <input type="hidden" name="frequency" value="3">
+                                <button type="submit" class="btn btn-primary">R500 / month</button>
+                            </form>
+
+                            <form name="PayFastMonthly1000" action="https://payment.payfast.io/eng/process" method="post">
+                                <input type="hidden" name="cmd" value="_paynow">
+                                <input type="hidden" name="receiver" value="36043087">
+                                <input type="hidden" name="return_url" value="https://nexgenleaders.org/donate?status=success">
+                                <input type="hidden" name="cancel_url" value="https://nexgenleaders.org/donate?status=cancelled">
+                                <input type="hidden" name="amount" value="1000">
+                                <input type="hidden" name="item_name" maxlength="255" value="Monthly Donation R1000 - The NexGen Leaders Foundation">
+                                <input type="hidden" name="item_description" maxlength="255" value="Thank you for your monthly donation of R1 000. Your support helps fund mentorship, educational support and leadership development for young people. You can cancel at any time.">
+                                <input type="hidden" name="subscription_type" value="1">
+                                <input type="hidden" name="recurring_amount" value="1000">
+                                <input type="hidden" name="cycles" value="0">
+                                <input type="hidden" name="frequency" value="3">
+                                <button type="submit" class="btn btn-primary">R1 000 / month</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -218,6 +270,10 @@
     (function () {
         const status = document.getElementById('donation-status');
         const result = new URLSearchParams(window.location.search).get('status');
+
+        if (result === 'success' || result === 'cancelled') {
+            status.scrollIntoView({ block: 'center' });
+        }
 
         if (result === 'success') {
             status.textContent = 'Thank you for your donation. PayFast will email your receipt.';

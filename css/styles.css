@@ -896,7 +896,7 @@ button[disabled] {
 }
 .footer-brand p {
     font-size: 0.88rem;
-    color: rgba(255,255,255,0.5);
+    color: var(--white);
     line-height: 1.7;
     margin-bottom: 1.25rem;
 }
@@ -917,7 +917,7 @@ button[disabled] {
 .footer-col ul li { margin-bottom: 0.6rem; }
 .footer-col ul li a {
     font-size: 0.88rem;
-    color: rgba(255,255,255,0.55);
+    color: var(--white);
     transition: color 0.2s;
 }
 .footer-col ul li a:hover { color: var(--yellow); }
@@ -932,7 +932,7 @@ button[disabled] {
 }
 .footer-bottom p, .footer-bottom a {
     font-size: 0.82rem;
-    color: rgba(255,255,255,0.35);
+    color: var(--white);
     margin: 0;
 }
 .footer-bottom a:hover { color: var(--yellow); }

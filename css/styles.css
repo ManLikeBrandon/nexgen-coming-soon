@@ -13,6 +13,8 @@
     --dark-text:  #111111;
     --mid-grey:   #5e6670;
     --light-grey: #dce2e8;
+    --header-bg:  #000000;
+    --nav-h:      124px;
 
     --shadow:    0 10px 24px rgba(0, 0, 0, 0.12);
     --shadow-sm: 0 6px 14px rgba(0, 0, 0, 0.1);
@@ -62,23 +64,29 @@ p:last-child { margin-bottom: 0; }
     position: fixed;
     top: 0; left: 0; right: 0;
     z-index: 1000;
-    background: var(--black);
+    background: var(--header-bg);
     border-bottom: 2px solid rgba(249, 222, 43, 0.75);
-    height: 70px;
+    height: var(--nav-h);
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    justify-content: space-between;
+    align-content: stretch;
+    justify-content: center;
     padding: 0 2rem;
 }
 
+/* Logo on its own row, set in from the left edge */
 .nav-brand {
     display: flex;
     align-items: center;
     gap: 10px;
     flex-shrink: 0;
+    flex-basis: 100%;
+    height: 72px;
+    padding-left: clamp(1rem, 4vw, 4rem);
 }
 .nav-brand img {
-    height: 40px;
+    height: 46px;
     width: auto;
 }
 .nav-brand-name {
@@ -95,9 +103,14 @@ p:last-child { margin-bottom: 0; }
     font-style: normal;
 }
 
+/* Menu centred on the row beneath the logo */
 .nav-links {
     display: flex;
     align-items: center;
+    justify-content: center;
+    flex-basis: 100%;
+    height: calc(var(--nav-h) - 72px - 2px);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
     gap: 1.75rem;
 }
 .nav-links a {
@@ -132,6 +145,25 @@ p:last-child { margin-bottom: 0; }
     color: var(--black) !important;
 }
 
+/* Donate button beside the hamburger, shown on mobile only */
+.nav-donate {
+    display: none;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    background: var(--yellow);
+    color: var(--black);
+    padding: 8px 16px;
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    box-shadow: 0 0 0 2px rgba(249, 222, 43, 0.25), var(--shadow-sm);
+    margin-left: auto;
+    margin-right: 0.75rem;
+}
+.nav-donate:hover { color: var(--black); }
+
 /* Hamburger */
 .nav-toggle {
     display: none;
@@ -155,7 +187,7 @@ p:last-child { margin-bottom: 0; }
    HERO — MAIN PAGE
    ============================================================ */
 .hero {
-    padding-top: 70px;
+    padding-top: var(--nav-h);
     background: var(--black);
     color: var(--white);
     min-height: 92vh;
@@ -203,7 +235,7 @@ p:last-child { margin-bottom: 0; }
    PAGE HERO — INNER PAGES
    ============================================================ */
 .page-hero {
-    padding-top: 70px;
+    padding-top: var(--nav-h);
     background: var(--black);
     color: var(--white);
 }
@@ -845,7 +877,7 @@ button[disabled] {
    FOOTER
    ============================================================ */
 .footer {
-    background: var(--black);
+    background: var(--header-bg);
     color: var(--white);
     padding: 5rem 2rem 2rem;
     border-top: 2px solid rgba(249, 222, 43, 0.75);
@@ -1367,15 +1399,24 @@ details[open] .faq-icon { transform: rotate(45deg); }
 }
 
 @media (max-width: 768px) {
-    /* Nav mobile */
+    /* Nav mobile: logo left, Donate + hamburger right */
+    :root { --nav-h: 70px; }
+    .nav { flex-wrap: nowrap; justify-content: space-between; padding: 0 1rem; }
+    .nav-brand { flex-basis: auto; height: auto; padding-left: 0.5rem; }
+    .nav-brand img { height: 40px; }
     .nav-links { display: none; }
+    .nav-links li:has(.nav-cta) { display: none; }
+    .nav-donate { display: inline-block; }
     .nav-toggle { display: flex; }
     .nav-links.open {
         display: flex;
         flex-direction: column;
+        justify-content: flex-start;
+        height: auto;
+        border-top: none;
         position: fixed;
-        top: 70px; left: 0; right: 0;
-        background: var(--black);
+        top: var(--nav-h); left: 0; right: 0;
+        background: var(--header-bg);
         padding: 1.5rem 2rem 2rem;
         gap: 1rem;
         border-bottom: 2px solid rgba(249, 222, 43, 0.75);
@@ -1423,7 +1464,7 @@ details[open] .faq-icon { transform: rotate(45deg); }
 
 .legal-toc {
     position: sticky;
-    top: 110px;
+    top: calc(var(--nav-h) + 40px);
     border-left: 4px solid var(--yellow);
     padding-left: 1.25rem;
 }
@@ -1474,7 +1515,7 @@ details[open] .faq-icon { transform: rotate(45deg); }
 .legal-body h2 {
     font-size: clamp(1.3rem, 2.6vw, 1.75rem);
     margin: 3.5rem 0 1.25rem;
-    scroll-margin-top: 110px;
+    scroll-margin-top: calc(var(--nav-h) + 40px);
 }
 .legal-body h2:first-child { margin-top: 0; }
 .legal-body h3 {
